@@ -52,7 +52,7 @@ Each file has an *inode* stored on disk. A file's inode describes the file and p
 
 Directories and special files also have inodes.
 
-A directory is a list of entires, each containing a name, a type (file, directory, or special file), and an inode number.
+A directory is a list of entries, each containing a name, a type (file, directory, or special file), and an inode number.
 
 The names within a directory must be unique, but multiple entries in a single directory---or across separate directories---may have the same inode. In other words, the same file or directory can be known by different names within a directory and can be listed in multiple, separate directories.
 

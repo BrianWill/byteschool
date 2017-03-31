@@ -14,7 +14,7 @@ We can also write *multi-line comments* starting with `/*` and ending with `*/`.
 
 ## semi-colons
 
-Most kinds of statement in Go must end with a semi-colon:
+Most kinds of statements in Go must end with a semi-colon:
 
 ```
 foo();

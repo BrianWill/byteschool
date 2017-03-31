@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>MOOPS assembly simulator</title>
+<style>
+
+#code_div {
+    float: left;
+    width: 39%;
+}
+
+#code_text {
+    border: 2px dashed #7AA;
+    margin: 10px auto;
+    padding: 5px;
+    display: block;
+    white-space: pre;
+    font-size: 11pt;
+    line-height: 16pt;
+    letter-spacing: 2px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #444;
+    overflow-x: scroll;
+}
+
+#current_line {
+    color: red;
+}
+
+#register_div {
+    float: right;
+    width: 60%;
+    
+}
+
+#register_table {
+    border-collapse: collapse;
+}
+
+#register_table td {
+    border: 2px solid #ACC;
+    padding: 4px;
+    letter-spacing: 1px;
+    margin: 10px auto;
+}
+
+#register_table td span {
+    text-align: right;
+    min-width: 215px;
+    color: red;
+    float: right;
+}
+
+#register_table td span.signed {
+    color: green;
+    padding-left: 20px;
+    min-width: 10px;
+    text-align: right;
+}
+
+#io_div {
+    float:right;
+    width: 60%;
+}
+
+</style>
+</head>
+
+<body>
+<h1>MOOPS assembly simulator</h1>
+
+<div id="code_div">
+<h3>code</h3>
+<div>
+<button id="run_button">RUN</button>
+<button id="step_button">STEP</button>
+<button id="reset_button">RESET</button>
+</div>
+
+<div id="code_text" contenteditable># write your code here
+<br/><br/><br/><br/><br/><br/><br/>
+</div>
+</div>
+
+<div id="register_div">
+    <h3>registers</h3>
+    <table id="register_table"></table>
+</div>
+
+<div id="io_div">
+<h3>keyboard buffer</h3>
+<div id="keyboard_buffer_div"></div>
+<h3>display output</h3>
+<div id="display_output_div"></div>
+<h3>memory</h3>
+<div id="memory_idv"></div>
+</body>
+</div>
+
+
+
+<script src="/static/moops/moops.js"></script>
+
+</html>

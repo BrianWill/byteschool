@@ -3,13 +3,13 @@
 
 Each process has a current working directory. When a process passes relative paths to certain system calls, the paths are resolved relative to the current working directory. For example, if a program has the current working directory `/harry/ted` and passes relative path `alice/bob` to the system call for opening files, the call opens the file `/harry/ted/alice/bob`.
 
-The Linux system calls are primarily meant to be called from code written in the *C* language, but because we haven't yet learnt C, we'll describe the essential file-related system calls in general terms:
+The Linux system calls are primarily meant to be called from code written in the *C* language, but because we haven't yet covered C, we'll describe the essential file-related system calls in general terms:
 
 ### open
 
 The *open* system call prepares a file for access and returns a ***file descriptor***, an integer number used in subsequent system calls to specify the open file. Descriptors are unique within the process.
 
-A descriptor is actually just a number representing to an underlying ***file description***. Each file description maintains a *marker* that determines where we read and write in the file.
+A descriptor is actually just a number representing an underlying ***file description***. Each file description maintains a *marker* that determines where we read and write in the file.
 
 ### dup
 
@@ -20,17 +20,16 @@ The *dup* system call (short for 'duplicate') takes a file descriptor as input a
 Passing a file descriptor to the *close* system call reclaims the file descriptor. Once we reclaim all file descriptors representing an underlying file description, the file description is reclaimed, effectively 'closing' the open file.
 
 In general, we should avoid leaving around open files we no longer need because doing so wastes memory. Once a process terminates, its open file descriptors get closed automatically, but in long-running processes, we may use many files over its lifetime, and so we should get in the habit of closing files explicitly.
-criptor?]
 
 ### lseek
 
 The *lseek* system call sets the position of a file description's marker. We pass in a file descriptor and a position.
 
-(What does 'l' in 'lseek' stand for? Possibly 'long', but no one seems to know for sure. The meaning is lost to history!)
+What does 'l' in 'lseek' stand for? Possibly 'long', but no one seems to know for sure. The meaning is lost to history!
 
 ### read
 
-The *read* system call copies some number of bytes from a file into memory of the process. We pass in a file descriptor, an address, and a number of bytes. Data from the file specified by the descriptor is copied to the address. The call returns the number of bytes copied, which will be no greater than the number of bytes specified.
+The *read* system call copies some number of bytes from a file into memory of the process. We pass in a file descriptor, an address, and a number of bytes. Data from the file specified by the descriptor is copied to the address. The call returns the number of bytes copied, which will be no greater than the number we passed as argument.
 
 A *read* call reads bytes starting from a position in the file denoted by the file description's marker. The marker is advanced by the number of bytes read, *e.g.* if *read* returns 10, the marker advances 10 bytes.
 
@@ -92,7 +91,7 @@ The *symlink* system call creates a symbolic link. The caller specifies two path
 
 The storage of a partition is divided into chunks called ***blocks***. The size of a block depends on the partition, but typical sizes include 512 bytes, 4kB, 8kB, 16kB, and 32kB. 
 
- - When a file is opened, each block we read or write has its own *buffer*, OS memory allocated to store bytes. 
+ - When a file is opened, for each block we read or write, a *buffer* (a chunk of memory) is allocated in the OS's memory.
  - When we read a file, bytes are copied from the partition blocks to OS buffers, and then bytes are copied from the buffers to our process. 
  - Likewise, when we write a file, bytes are copied from our process to OS buffers, and then bytes are copied from the buffers to the partition blocks.
 

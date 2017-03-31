@@ -4,14 +4,17 @@
 
 ## data as bits
 
- - [bits and bytes](/content/intro topics/bits and bytes.html)
- - [numbers as bits](/content/intro topics/numbers as bits.html)
- - [text as bits](/content/intro topics/text as bits.html)
+ - [bits and bytes](/content/data as bytes/bits and bytes.html)
+ - [numbers as bits](/content/data as bytes/numbers as bits.html)
+ - [text as bits](/content/data as bytes/text as bits.html)
 
 ## hardware and assembly code
 
- - [computer hardware](/content/intro topics/computer hardware.html)
- - [assembly language](/content/intro topics/assembly language.html)
+ - [computer hardware](/content/assembly/computer hardware.html)
+ - [assembly language](/content/assembly/assembly language.html)
+ - [assembly instructions](/content/assembly/assembly instructions.html)
+ - [assembly functions and using the stack](/content/assembly/assembly functions.html)
+ - [assembly I/O](/content/assembly/assembly io.html)
 
 ## Pigeon (an educational language)
 
@@ -61,6 +64,7 @@
 
 ## the Go standard library
 
+ - [overview of standard packages](/content/gomisc/standard packages.html)
  - ["strings" package](/content/gomisc/strings package.html)
  - ["strconv" package](/content/gomisc/strings package.html)
  - ["fmt" package](/content/gomisc/parseargs, flags.html)

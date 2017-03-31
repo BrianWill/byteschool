@@ -1,0 +1,2 @@
+# Go string functions (PRACTICAL)
+

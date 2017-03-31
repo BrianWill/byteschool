@@ -1,12 +1,28 @@
+## compiling Go code
+
+To compile Go code, you'll need to install and set up the Go tools:
+
+ 1. download the installer for your platform from [golang.org](http://golang.org)
+ 2. run the installer
+ 3. create a directory under which you want to keep all of your Go source code
+ 4. create an [***environment***](https://en.wikipedia.org/wiki/Environment_variable) variable called *GOPATH*, setting it to your new directory 
+ 5. if you don't have it already, install [Git](https://git-scm.com/downloads)
+
+The Go tools are meant to be run from the command line because we need to pass in arguments. The first argument to `go` is the *subcommand*, which specifies what you want to do, *e.g.* *run*, *build*, *install*.
+
 ## packages
 
-Go code is organized into namespaces called packages. The first line of code in a source file must be a *package statement* stating the name of the containing package:
+Go source files are organized into ***packages***. The first line of code in a source file must be a *package statement* stating the name of its containing package:
 
 ```
 package foo;            // this source file is part of a package called 'foo'
 ```
 
-The source files of a package should all be stored in a directory under `GOPATH/src` ('src', short for 'source'). The relative path to this directory is the package's ***import path***. For example, a package stored at `GOPATH/src/foo/bar/ack` has import path `foo/bar/ack`. By convention, the last component of a package's import path should be the same as its name, *e.g.* each source file in `GOPATH/src/foo/bar/ack` would have `package ack;` as its first statement.
+The source files of a package should all be stored in a directory under `GOPATH/src` ('src' is short for 'source'). The relative path to this directory is the package's ***import path***. For example, a package stored at `GOPATH/src/foo/bar/ack` has import path `foo/bar/ack`.
+
+By convention, the last component of a package's import path should be the same as its name, *e.g.* each source file in `GOPATH/src/foo/bar/ack` would have `package ack;` as its first statement.
+
+## imports
 
 To use code from another package in a source file, you must import that package by its import path using an `import` statement:
 
@@ -16,7 +32,7 @@ import "foo/bar/ack";    // import the package at path foo/bar/ack
 
 The `import` statements in a file must all go underneath the `package` statement but before anything else.
 
-To use the elements of an imported package, we prefix their names with the package name, separated by a dot. For example, if we import a package called *foo*, we write *`foo.Bar`* to access *Bar* defined in that package.
+To use the elements of an imported package, we prefix their names with the package name, separated by a dot. For example, if we import a package called *foo*, we refer to *Bar* defined in *foo* by writing *`foo.Bar`* .
 
 Only names beginning with capital letters can be accessed by name from other packages. If you only need something in the local package, it's generally best to keep it 'private' to the current package by giving it a name beginning with a lowercase letter.
 
@@ -30,23 +46,9 @@ A ***library*** is a body of existing code meant to be incorporated by other pro
 
 Go's standard library is made up of several dozen packages. The standard library packages have short import paths like "fmt", "os", and "time".
 
-## compiling Go
-
-To compile Go code, you'll need to install and set up the Go tools:
-
- 1. download the installer for your platform from [golang.org](http://golang.org)
- 2. run the installer
- 3. create a directory under which you want to keep all of your Go source code
- 4. create an [***environment***](https://en.wikipedia.org/wiki/Environment_variable) variable called *GOPATH*, setting it to your new directory 
- 5. if you don't have it already, install [Git](https://git-scm.com/downloads)
-
-(Here are more detailed instructions for [Windows](http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/).)
-
-The Go tools are meant to be run from the command line because we need to pass in arguments. The first argument to `go` is the *subcommand*, which specifies what you want to do, *e.g.* *run*, *build*, *install*.
-
 ## `run` subcommand
 
-The `run` subcommand is meant only for running very small example programs. It compiles the specified source file(s) into an executable, runs it, and then deletes the executable when the program finishes.
+The `run` subcommand is meant only for running very small example programs. It compiles the specified source file(s) into an executable, runs it, and then deletes the executable when the program ends.
 
 ```
 go run file1.go file2.go

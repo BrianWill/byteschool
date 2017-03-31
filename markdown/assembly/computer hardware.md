@@ -66,7 +66,7 @@ An input device sends data for the CPU to read. An output device receives data f
 
 I/O devices contain their own registers, and it is these registers which the CPU reads and writes to communicate with the device.
 
-In a system with ***port-mapped I/O***, the CPU reads and writes the device registers using input/output instructions specifying the registers by *port numbers*. Ports are effectively a separate address space.s
+In a system with ***port-mapped I/O***, the CPU reads and writes the device registers using input/output instructions specifying the registers by *port numbers*. Ports are effectively a separate 'address space'.
 
 In a system with ***memory-mapped I/O***, the CPU reads and writes the device registers using regular copy instructions. For this to work, certain addresses are mapped to devices rather than to memory.
 
