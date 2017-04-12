@@ -1,6 +1,6 @@
 # overview of Go's standard packages
 
-Go's standard library contains over 100 packages encompassing many common needs. Notably, while Go has a few standard packages for creating image files, it has no standard packages for drawing on the screen, nor creating windows, nor processing audio. For such purposes, you'll need to use non-standard packages or link against platform API's directly (which are typically written in C or C++).
+Go's standard library contains over 100 packages encompassing many common needs. Notably, while Go has a few standard packages for creating image files, it has no standard packages for drawing on the screen. Nor does have packages for creating windows or processing audio. For such purposes, you'll need to use non-standard packages or link against platform API's directly (which requires some understanding of C and C++, the languages in which platform API's are written).
 
 ## packages
 
@@ -22,7 +22,7 @@ The `ioutil` package provides a few additional convenience functions for reading
 
 ### fmt
 
-The `fmt` ('formatted') package provides ways of formating data as it is read and written.
+The `fmt` ('formatted') package provides functions and methods for formating data as it is read and written from files.
 
 ### errors
 
@@ -38,19 +38,23 @@ The `encoding` package encodes and decodes data in several basic formats, includ
 
 ### archive/tar, archive/zip
 
-The `archive/tar` and `archive/zip` packages read and write tar and zip files, respectively. (An archive file is a single file that contains the data of multiple other files. A tar file is an uncompressed archive file. A zip file is a compressed archive file.)
+ - An *archive file* is a single file that contains the data of multiple other files.
+ - A *tar* file is an uncompressed archive file.
+ - A *zip* file is a compressed archive file.
+
+The `archive/tar` and `archive/zip` packages read and write tar and zip files, respectively. 
 
 ### compress
 
-The `compress` package compresses and decompresses data with the most popular lossless compression algorithms.
+The `compress` package compresses and decompresses data using the most popular lossless compression algorithms.
 
 ### database/sql
 
-The `database/sql` package makes SQL queries to a database.
+The `database/sql` package makes [SQL](https://en.wikipedia.org/wiki/SQL) queries to a database.
 
 ### image, image/color, image/draw
 
-Thes packages contain types for representing and manipulating images in memory. (These packages do not display the images on screen.)
+These packages contain types for representing and manipulating images in memory. (These packages do *not* display the images on screen.)
 
 ### image/gif, image/jpeg, image/png
 
@@ -58,11 +62,11 @@ These packages encode and decode images in the gif, jpeg, and png formats.
 
 ### crypto
 
-The `crypto` packages encrypt and decrypt data using popular encrytption algorithms. They also can generate cryptographic hashes using popular algorithms, like SHA and MD5.
+The `crypto` packages encrypt and decrypt data using popular encrytption algorithms. They also generate cryptographic hashes using [SHA](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms), [MD5](https://en.wikipedia.org/wiki/MD5), and a few other popular algorithms.
 
 ### crypto/rand, math/rand
 
-Both `crypto/rand` and `math/rand` both generate random numbers, but only `crypto/rand` is suitable for encryption purposes. Using `math/rand` is more efficient, but using it to generate encryption keys is a bad idea.
+Both `crypto/rand` and `math/rand` generate random numbers, but only `crypto/rand` is suitable for encryption purposes. Using `math/rand` is more efficient, but using it to generate encryption keys is insecure.
 
 ### math
 
@@ -80,7 +84,7 @@ The `net` package sends and receives data over TCP and UDP.
 
 The `net/http` package sends and receives data over HTTP.
 
-### path, path/filepath
+### path/filepath
 
 The `path/filepath` package manipulates filepaths in a way that abstracts over the differences between filepaths on Windows and Unix.
 
@@ -106,15 +110,15 @@ The `sync` package provides synchronization primitives for multithreading.
 
 ### testing
 
-The `testing` package helps write automated tests (code that checks the correctness of other code).
+The `testing` package helps with writing automated tests (code that checks the correctness of other code).
 
 ### time
 
-The `time` package provides types representing dates and times and functions for reading the system clock and timers.
+The `time` package provides types representing dates and times and also provides functions for reading the system clock and timers.
 
 ## special packages
 
-These five special packages do not contain ordinary Go code: they provide functionality we would not have access to in Go if the language did not provide them for us:
+These six special packages do not contain ordinary Go code: they provide functionality we would not have access to in Go if the language did not provide them for us:
 
 ### syscall
 
@@ -122,11 +126,11 @@ The `syscall` package contains functions for invoking system calls. Unlike every
 
 Normal Go programs should generally use other standard packages instead of using `syscall` directly.
 
-(The `syscall` packages have actually been deprecated. Since Go 1.4, you should use the replacement `golang.org/x/sys` packages.)
+(The `syscall` packages have actually been deprecated. Since Go 1.4, you should use the replacement `golang.org/x/sys` packages instead.)
 
 ### builtin
 
-The `builtin` package does not actually exist and has no code. This 'package' is in the documentation simply to document Go's built-in types and functions, such as `int64`, `make`, and `append`. Importing `builtin` triggers a compile error.
+The `builtin` package does not actually exist! This 'package' is in the documentation simply to provide documentation for Go's built-in types and functions, such as `int64`, `make`, and `append`. Importing `builtin` triggers a compile error.
 
 ### reflection
 
@@ -134,8 +138,12 @@ Using a type assertion, we can check if an interface value references a specific
 
 The `reflection` package lets us do such 'runtime discovery' of the types of interface values. The *fmt.Println* function, for example, uses reflection to discover the concrete types of its empty interface parameters and thereby create text representations appropriate to each.
 
+### runtime
+
+The `runtime` package provides types and functions for interacting with Go's runtime system, such as functions for controlling how goroutines execute.
+
 ### C, unsafe
 
-If we compile our code with the special `cgo` tool, our Go code can call functions written in C. To refer to these functions by name, our Go code imports the special package `C`, *e.g.* to call a C function called `foo`, we would refer to it by name by importing package `C` and writing `C.foo`.
+If we compile our code with the special `cgo` tool, our Go code can call functions written in the C language. To refer to these functions by name, our Go code imports the special package `C`, *e.g.* to call a C function named `foo`, we would refer to it by name by importing package `C` and writing `C.foo`.
 
 Unlike Go code, C code is not garbage collected, and C's data types do not exactly match those in Go. The `unsafe` package helps us bridge these differences when calling C code from Go.

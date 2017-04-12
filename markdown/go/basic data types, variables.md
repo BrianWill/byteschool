@@ -24,14 +24,17 @@ The basic data types in Go are:
 ```
   bool        (short for 'boolean', a value that is either true or false)
   string
-  int         (signed integer, either 32 or 64 bits depending upon the compilation target)
-  uint        (unsigned integer, either 32 or 64 bits depending upon the compilation target)
+
   float32     (32-bit floating point)
   float64     (64-bit floating point)
+
+  int         (signed integer, either 32 or 64 bits depending upon the compilation target)
   int8        (8-bit signed integer)
   int16       (16-bit signed integer)
   int32       (32-bit signed integer)
   int64       (64-bit signed integer)
+
+  uint        (unsigned integer, either 32 or 64 bits depending upon the compilation target)
   uint8       (8-bit unsigned integer)
   uint16      (16-bit unsigned integer)
   uint32      (32-bit unsigned integer)
@@ -85,7 +88,7 @@ vad f int64 = 79.042      // compile error: an int64 value must be an integer
 var g int8 = 2000         // compile error: the max value of an int8 is 127
 ```
 
-An arithmetic operation's operands must both be the same type. The operation's return value is the same type as the operands:
+The operands of an arithmetic operation must both be the same type. The return value is the same type as the operands:
 
 ```go
 var foo int = 2

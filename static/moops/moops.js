@@ -12,6 +12,7 @@ TODO
 const MAX_ADDRESS = Math.pow(2, 32) - 1;
 const MAX_VALUE = Math.pow(2, 32) - 1;
 const MIN_VALUE = -Math.pow(2, 31);
+const MIN_MEMORY_ADDRESS = 0x40000000;
 
 // token types
 const SQUARE_LEFT = 0,
@@ -168,15 +169,19 @@ const mnemonicToOpcode = {
     "return": [RETURN, ""],
 };
 
+const KEYBOARD_STATUS_ADDRESS = 0x20000000;
+const KEYBOARD_DATA_ADDRESS = 0x20000001;
+const DISPLAY_STATUS_ADDRESS = 0x20000002;
+const DISPLAY_DATA_ADDRESS = 0x20000003;
+
 // register state
 var memory;
 var registers, overflow;
-var keyboard_buffer, keyboard_status, keyboard_data; 
-var display_status, display_data;
-
-var instructions = null;
+var keyboard, display;
+var instructions;
 
 function reset() {
+    errorMsg.innerHTML = "";
     memory = {};
     registers = {
         'r0': 0x00000000,
@@ -191,15 +196,67 @@ function reset() {
         'pc': 0x00000000,
     };
     overflow = false;
-    keyboard_buffer = [];
-    keyboard_status = 0x00;
-    keyboard_data = 0x00;
-    display_status = 0x00;
-    display_data = 0x00;
-    for (var i = 0; i < 256; i++) {
-        keyboard_buffer[i] = 0;
-    }
     instructions = null;
+    keyboard = {
+        status: 0,
+        data: [],          // circular buffer
+        idx: 0,
+        length: 0,
+        SIZE: 256,
+        STATUS_ADDRESS: 0x20000000,
+        DATA_ADDRESS: 0x20000001,
+        read: function() {   
+            if (this.length === 0) {
+                return 0;          // empty buffer returns 0
+            }
+            var value = this.data[this.idx];   // we read from front of buffer
+            this.idx++;
+            if (this.idx === this.SIZE) {
+                this.idx = 0;
+            }
+            this.length--;
+            return value;
+        },
+        write: function(value) {   
+            if (this.length === 0) {
+                this.data[this.idx] = value;
+                this.length = 1;
+                this.idx++;
+                if (this.idx === this.SIZE) {
+                    this.idx = 0;
+                }
+            } else if (this.length === this.SIZE) {
+                // do nothing: if buffer is full, typed keys are ignored
+            } else {
+                var i = this.idx + this.length;
+                if (i >= this.SIZE) {
+                    i -= this.SIZE;
+                }
+                this.data[i] = value;      // we write to end of buffer
+                this.length++;
+            }
+        }
+    };
+    display = {
+        status: 0,
+        data: [],   
+        MAX_SIZE: 1000,  // impose a cap just so it doesn't get crazy huge
+        STATUS_ADDRESS: 0x20000002,
+        DATA_ADDRESS: 0x20000003,
+        write: function(value) {
+            this.data[this.data.length] = value;
+            if (this.data.length > this.MAX_SIZE) { // if too big, discard first half of buffer
+                this.data = this.data.slice(Math.floor(this.MAX_SIZE / 2));
+            }
+        },
+        toString: function() {
+            var chars = [];
+            for (var i in this.data) {
+                chars.push(String.fromCharCode(this.data[i]));
+            }
+            return chars.join('');
+        }
+    };
     highlightLine(null);
     displayRegisters();
 }
@@ -225,7 +282,12 @@ function readRegister(reg) {
 }
 
 function signedDecimal(value) {
-    return (value ^ 0xFFFFFFFF) + 1;
+    var a = (value & 0x80000000) >>> 0; // shift to remove sign
+    if (a === 0x80000000) {
+        return -Math.abs(value ^ 0xFFFFFFFF + 1);
+    } else {
+        return '';
+    }
 }
 
 function addUnsigned32Bit() {
@@ -296,21 +358,48 @@ function readMemory(address) {
     if (address > MAX_ADDRESS || address < 0) {
         throw "address " + address + " is invalid";
     }
-    var value = memory[address];
-    if (value === undefined) {
-        value = 0;
+    if (address >= MIN_MEMORY_ADDRESS) {
+        var value = memory[address];
+        if (value === undefined) {
+            value = 0;
+        }
+        return value;
     }
-    return value;
+    switch (address) {
+    case KEYBOARD_STATUS_ADDRESS:
+    case KEYBOARD_DATA_ADDRESS:
+    case DISPLAY_STATUS_ADDRESS:
+    case DISPLAY_DATA_ADDRESS:
+
+    }
 }
 
 function writeMemory(address, value) {
     if (address > MAX_ADDRESS || address < 0) {
         throw "address " + address + " is invalid";
     }
-    if (address > 255 || address < 0) {
+    if (value > 255 || value < 0) {
         throw "byte value " + value + " is invalid";
     }
-    memory[address] = value;
+    if (address >= MIN_MEMORY_ADDRESS) {
+        memory[address] = value;
+    }
+    switch (address) {
+    case KEYBOARD_STATUS_ADDRESS:
+        keyboard_status = value;
+    case KEYBOARD_DATA_ADDRESS:
+        keyboard_end_idx++;
+        if (keyboard_end_idx === 256) {
+            keyboard_end_idx = 0;
+        }
+        if (keyboard_data.length < 256) {
+            keyboard
+        }
+        
+    case DISPLAY_STATUS_ADDRESS:
+    case DISPLAY_DATA_ADDRESS:
+
+    }
 }
 
 // depending upon the instruction, it has properties .dest, .src, .op1, .op2
@@ -761,19 +850,19 @@ function displayRegisters() {
             <td>sp: ${decimalToHex(registers['sp'])} <span>${registers['sp']}</span></td>
         </tr>
         <tr>
-            <td>r1: ${decimalToHex(registers['r1'])} <span>${registers['r1']}<span class="signed">-${signedDecimal(registers['r1'])}</span></span></td>
-            <td>r2: ${decimalToHex(registers['r2'])} <span>${registers['r2']}<span class="signed">-${signedDecimal(registers['r2'])}</span></span></td>
+            <td>r1: ${decimalToHex(registers['r1'])} <span>${registers['r1']}<span class="signed">${signedDecimal(registers['r1'])}</span></span></td>
+            <td>r2: ${decimalToHex(registers['r2'])} <span>${registers['r2']}<span class="signed">${signedDecimal(registers['r2'])}</span></span></td>
         </tr>
         <tr>    
-            <td>r3: ${decimalToHex(registers['r3'])} <span>${registers['r3']}<span class="signed">-${signedDecimal(registers['r3'])}</span></span></td>
-            <td>r4: ${decimalToHex(registers['r4'])} <span>${registers['r4']}<span class="signed">-${signedDecimal(registers['r4'])}</span></span></td>
+            <td>r3: ${decimalToHex(registers['r3'])} <span>${registers['r3']}<span class="signed">${signedDecimal(registers['r3'])}</span></span></td>
+            <td>r4: ${decimalToHex(registers['r4'])} <span>${registers['r4']}<span class="signed">${signedDecimal(registers['r4'])}</span></span></td>
         </tr>
         <tr>
-            <td>r5: ${decimalToHex(registers['r5'])} <span>${registers['r5']}<span class="signed">-${signedDecimal(registers['r5'])}</span></span></td>
-            <td>r6: ${decimalToHex(registers['r6'])} <span>${registers['r6']}<span class="signed">-${signedDecimal(registers['r6'])}</span></span></td>
+            <td>r5: ${decimalToHex(registers['r5'])} <span>${registers['r5']}<span class="signed">${signedDecimal(registers['r5'])}</span></span></td>
+            <td>r6: ${decimalToHex(registers['r6'])} <span>${registers['r6']}<span class="signed">${signedDecimal(registers['r6'])}</span></span></td>
         </tr>
         <tr>
-            <td>r7: ${decimalToHex(registers['r7'])} <span>${registers['r7']}<span class="signed">-${signedDecimal(registers['r7'])}</span></span></td>
+            <td>r7: ${decimalToHex(registers['r7'])} <span>${registers['r7']}<span class="signed">${signedDecimal(registers['r7'])}</span></span></td>
         </tr>
     `;
 }
@@ -841,19 +930,33 @@ var codeDiv = document.getElementById('code_text');
 var runButton = document.getElementById('run_button');
 var stepButton = document.getElementById('step_button');
 var resetButton = document.getElementById('reset_button');
+var errorMsg = document.getElementById('error_message');
+
+function displayError(ex) {
+    if (typeof ex === "string") {
+        errorMsg.innerHTML = 'ERROR:' + ex;
+    }
+}
 
 runButton.onclick = function run() {
     reset();
     var code = codeDiv.innerText;
-    instructions = assemble(code);
-    
+    try {
+        instructions = assemble(code);
+    } catch (ex) {
+        displayError(ex);
+    }
 
-    // step by recursive timeout because we can't hog single thread: 
+    // step via recursive timeout because we can't hog single thread: 
     // we need keyboard input handler to run while instructions are executing
     function step() {
         var instruction = instructions[registers['pc']];
         if (instruction !== undefined) {
-            runInstruction(instruction);
+            try {
+                runInstruction(instruction);
+            } catch (ex) {
+                displayError(ex);
+            }
             displayRegisters();
             window.setTimeout(step, 0);
         } else {
@@ -867,12 +970,20 @@ stepButton.onclick = function step() {
     if (instructions === null) {
         reset();
         var code = codeDiv.innerText;
-        instructions = assemble(code);
+        try {
+            instructions = assemble(code);
+        } catch (ex) {
+            displayError(ex);
+        }
     }
     var instruction = instructions[registers['pc']];
     if (instruction !== undefined) {
         highlightLine(instruction.lineIdx);
-        runInstruction(instruction);
+        try {
+            runInstruction(instruction);
+        } catch (ex) {
+            displayError(ex);
+        }
         displayRegisters();
     } else {
         reset();

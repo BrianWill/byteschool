@@ -9,7 +9,7 @@ Normally, every instance of a class has its own copy of each field, but if a fie
 
 In truth, **static fields are really just global variables**.
 
-Like instance fields (non-static fields), an uninitialiezd static field defaults to a zero value, but we usually initialize static fields when they are declared:
+An uninitialiezd static field defaults to a zero value, but we usually initialize static fields when they are declared:
 
 ```java
 class Cat {

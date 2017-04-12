@@ -23,6 +23,7 @@
     font-weight: bold;
     color: #444;
     overflow-x: scroll;
+    outline: none;
 }
 
 #current_line {
@@ -65,14 +66,23 @@
     width: 60%;
 }
 
+#error_message {
+    color: red;
+    animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
 </style>
 </head>
 
 <body>
 <h1>MOOPS assembly simulator</h1>
-
+<h3 id="error_message"></h3>
 <div id="code_div">
-<h3>code</h3>
+<h2>code</h2>
 <div>
 <button id="run_button">RUN</button>
 <button id="step_button">STEP</button>

@@ -18,7 +18,7 @@
 
 ## Pigeon (an educational language)
 
- - [high-level languages](/content/intro topics/high-level languages.html)
+ - [high-level languages](/content/pigeon/high-level languages.html)
  - [data types, operators](/content/pigeon/data types, operators.html)
  - [if and while statements](/content/pigeon/if statements, while statements.html)
  - [functions, lists](/content/pigeon/functions, lists.html)
@@ -65,28 +65,29 @@
 ## the Go standard library
 
  - [overview of standard packages](/content/gomisc/standard packages.html)
+ - ["os" package](/content/gomisc/os package.html)
+ - ["io" package](/content/gomisc/io package.html)
+ - ["bufio" package](/content/gomisc/bufio package.html)
+ - ["io/ioutil" package](/content/gomisc/ioutil package.html)
+ - ["strconv" package](/content/gomisc/strconv package.html)
  - ["strings" package](/content/gomisc/strings package.html)
- - ["strconv" package](/content/gomisc/strings package.html)
- - ["fmt" package](/content/gomisc/parseargs, flags.html)
- - ["os" package](/content/gomisc/reading & writing files.html)
- - ["parseargs" package](/content/gomisc/parseargs, flags.html)
- - ["flags" package](/content/gomisc/parseargs, flags.html)
- - ["bufio" package](/content/gomisc/parseargs, flags.html)
- - ["math" package](/content/gomisc/parseargs, flags.html)
- - ["log" package](/content/gomisc/parseargs, flags.html)
- - ["io" package](/content/gomisc/parseargs, flags.html)
- - ["ioutil" package](/content/gomisc/parseargs, flags.html)
- - ["path" package](/content/gomisc/parseargs, flags.html)
- - ["filepath" package](/content/gomisc/parseargs, flags.html)
- - ["sort" package](/content/gomisc/parseargs, flags.html)
- - ["time" package](/content/gomisc/parseargs, flags.html)
+ - ["fmt" package](/content/gomisc/fmt package.html)
+ - ["flag" package](/content/gomisc/flag package.html)
+ - ["time" package](/content/gomisc/time package.html)
 
-## networking and the web
+## networking protocols
 
- - [IP, ICMP]()
- - [UDP, TCP]()
- - [HTTP]() 
- - [HTML, CSS]()
+ - [IPv4, DNS](/content/networking/IP, DNS.html)
+ - [UDP, TCP, ICMP, NAT](/content/networking/UDP, TCP, ICMP, NAT.html)
+ - [Linux system calls for networking](/content/networking/Linux system calls for networking.html)
+ - [HTTP](/content/networking/http.html)
+
+## the web
+
+ - [HTML](/content/web/html.html)
+ - [CSS](/content/web/css.html)
+ - [Javascript in the browser](/content/web/javascript in the browser.html)
+ - [the DOM](/content/web/the dom.html)
 
 ## databases
 
@@ -136,7 +137,7 @@
 
  - [Java for Go programmers](/content/java/Java for Go programmers.html)
  - [primitive types, variables](/content/java/primitives, variables.html)
- - [classes, constructors](/content/java/classes and constructors.html)
+ - [classes, constructors](/content/java/classes, constructors.html)
  - [static fields, static methods](/content/java/static fields, static methods.html)
  - [interfaces, method overloading](/content/java/interfaces, overloading.html)
  - [enums](/content/java/enums.html)

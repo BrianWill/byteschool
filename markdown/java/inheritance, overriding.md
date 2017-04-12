@@ -58,7 +58,7 @@ m.meow();                 // depending on value of 'x', 'm' here might reference
 
 Because of such cases (which are very common), the compiler doesn't presume to know the type of the referenced instance at any point.
 
-This is analagous to how a type which implements an interface is accepted as a substitute for the interface type. As far as the compiler is concerned, an instance type variable doesn't reference any particular implementing type, and so we can only call the methods of the interface *via* the variable:
+This is analagous to how a type which implements an interface is accepted as a substitute for the interface type. As far as the compiler is concerned, an instance type variable doesn't reference any particular implementing type, and so only the methods of the interface can be called *via* the interface variable:
 
 ```java
 // assume 'Cat' implements interface 'Eater'

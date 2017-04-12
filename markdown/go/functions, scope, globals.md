@@ -35,15 +35,15 @@ func foo(a int) {          // parameter 'a' belongs to the scope of the function
 }
 ```
 
-If a subscope declares a variable of the same name as a variable from a containing scope, the name in that subscope always refers to the subscope's own variable. The variable of that name from the outer scope is effectively inaccessible in the subscope (if this ever creates a problem, simply change the name(s) so that they're different!). 
+If a subscope declares a variable of the same name as a variable from a containing scope, the name in that subscope after the declaration refers to the subscope's own variable. The variable of that name from the outer scope is effectively inaccessible past that point in the subscope (if this ever creates a problem, simply change the name(s) so that they're different!).
 
 ```go
-func foo(x) {
+func foo(x int) {
     if x < 5 {
-        fmt.Println(x)     // compile error: cannot use 'x' before it is declared
-        x := x + 2         // compile error: cannot use 'x' before it is declared
-        fmt.Println(a)
-    }    
+        fmt.Println(x)     // print 'x' of outer scope
+        x := x + 3         // declare 'x' in this scope, assigning it the result of adding 'x' of outer scope and 3
+        fmt.Println(x)     // print 'x' of this scope
+    }
 }
 ```
 

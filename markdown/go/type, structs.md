@@ -47,7 +47,7 @@ A ***struct*** (short for 'structure') is a data type composed of named values o
 
 ```
 // define 'foo' to be a struct type with an int named 'a', a string named 'b', and a float32 named 'c'
-type foo struct{
+type foo struct {
     a int
     b string
     c float32
@@ -78,7 +78,7 @@ bar.b = "bye"                                // set element 'b' to "bye"
 bar.c = -8.5                                 // set element 'c' to -8.5
 ```
 
-(Note that we've already seen `.` used for two different purposes: accessing elements of structs and accessing elements of imported packages.)
+(Note that we've already seen `.` used for two other purposes: accessing elements of structs and accessing elements of imported packages.)
 
 Here's a more realistic struct type example:
 
