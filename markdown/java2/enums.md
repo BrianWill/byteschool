@@ -2,13 +2,12 @@
 
 An ***enum*** (short for 'enumeration') is a minor variation of a class that makes it easy to define discrete, named values.
 
-For an enum, there is a fixed set of instances of that type. The instance names are listed in the enum before any fields or methods:
+For an enum, there is a fixed set of instances of that type. The instance names are listed in the enum:
 
 ```java
 enum DayOfWeek {
     // 7 instances of this enum
     SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
-    // ... fields and methods may follow
 }
 ```
 

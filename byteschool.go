@@ -46,7 +46,7 @@ var header = []byte(`
         font-size: inherit;
         word-spacing: 0pt;
         font-weight: inherit;
-        font-size: 85%;
+        font-size: 90%;
     }
     .hljs-keyword {
         color: #222296;

@@ -33,7 +33,7 @@ The first GB of addresses, `0x0000_0000` through `0x3FFF_FFFF` (the last GB) are
  - `0x2000_0002` is the display buffer status register
  - `0x2000_0003` is the display buffer data register
 
-All other addresses remain unmapped. (We're mapping far more addresses for I/O than we need, but for our purposes, we just want big round hex numbers.)(We'll discuss the keyboard and display buffers in a later lesson.)
+All other addresses remain unmapped. (We're mapping far more addresses for I/O than we need, but for our purposes, we just want big round hex numbers. We'll discuss the keyboard and display buffers in a later lesson.)
 
 Our CPU will only read instructions from the boot ROM.
 
@@ -49,7 +49,7 @@ Registers `r0`, `sp`, and `pc` are special:
  - The `sp` register stores the stack pointer of the call stack.
  - The `pc` register stores the address of the next instruction to execute. When an instruction is executed, `pc` is automatically updated to the address of the next instruction, *e.g.* when executing a 3-byte instruction at `0x0000_0070`, `pc` is automatically set to `0x0000_0073`. Jump instructions write a value to `pc` and thereby change what instruction will execute next.
 
-When the system powers on, all registers are set to `0x0000_0000`, except `sp` is set to `0xF000_0000`, and `pc` is set to `0xC000_0000` (so that's where execution starts).
+When the system powers on, all registers are set to `0x0000_0000`, except `sp` is set to `0xFFFF_0000`, and `pc` is set to `0xC000_0000` (so that's where execution starts).
 
 ## true and false
 
@@ -57,11 +57,11 @@ Several instructions use 0 (0x0000_0000) to represent *true* and -1 (0xFFFF_FFFF
 
 ## address operands
 
-When we specify addresses in instructions, we do so with two registers and an offset (a signed 32-bit integer) surrounded in `[]`. For example, if register r1 holds the value 0x00AA_BBC4 and r2 holds the value 0x0000_0002, then `[r2 r1 -3]` represents the address 0x00AA_BBC3 (0x00AA_BBC4 plus 2 minus 3).
+When we specify addresses in instructions, we do so with two registers and an offset (a signed 32-bit integer) surrounded in `[]`. For example, if register `r1` holds the value `0x00AA_BBC4` and `r2` holds the value `0x0000_0002`, then `[r2 r1 -3]` represents the address `0x00AA_BBC3` (`0x00AA_BBC4` plus `0x0000_0002` minus `3`).
 
-If the offset is omited, it defaults to 0. If we omit one or both registers, they default to r0.
+If the offset is omited, it defaults to `0`. If we omit one or both registers, they default to `r0`.
 
-An address operand requires six data bytes to represent: one byte for each register, and four bytes for the offset.
+An address operand requires six data bytes to represent: one byte for each register and four bytes for the offset.
 
 ## mnemonic
 
@@ -73,9 +73,9 @@ Our simple computer has no hardware interrupts or exceptions.
 
 ## instruction labels
 
-Our assembly code is written as a list of instructions, line-by-line. When we want to jump back to an instruction, we need to know its numeric address, which requires counting up the number of bytes occupied by all previous instructions and adding that number to the address of the first instruction. Not only is this extremely tedious and error-prone, we'll have to recompute the address any time we add, remove, or modify prior instructions!
+Our assembly code is written as a list of instructions, line-by-line. When we want to jump to an instruction, we need to know its numeric address, which requires counting up the number of bytes occupied by all previous instructions and adding that number to the address of the first instruction. Not only is this extremely tedious and error-prone, we'll have to recompute the address any time we add, remove, or modify prior instructions!
 
-To spare us this enormous hassle, assemblers let us label our instructions. A label can consist of letters of the alphabet, numerals, and underscores, and is denoted by ending with a colon. A label either precedes the instruction it labels (either on the same line or on the next non-blank line):
+To spare us this enormous hassle, assemblers let us label our instructions. A label can consist of letters of the alphabet, numerals, and underscores, and is denoted by ending with a colon:
 
 ```
 foo: copy r1, r2              # this instruction is labeled 'foo'
@@ -97,7 +97,7 @@ bar: 50 bytes                 # labeled chunk of 50 bytes
 ack: 7 bytes                  # labeled chunk of 7 bytes
 ```
 
-The label of the first chunk represents address 0x0000_0000. Each successive label represents the previous address offset by the size of its chunk. Above, *foo* is 0x0000_0000, *bar* is 0x0000_0032 (decimal 50), and *ack* is 0x0000_0039 (decimal 57).
+The label of the first chunk represents address `0x0000_0000`. Each successive label represents the previous address offset by the size of its chunk. Above, *foo* is `0x0000_0000`, *bar* is `0x0000_0032` (decimal `50`), and *ack* is `0x0000_0039` (decimal `57`).
 
 We can specify string and number values to be written to these chunks before our first instruction executes. Strings are encoded as ASCII and terminated with a 0 byte; each number occupies a single byte unless it is suffixed with a `w`, in which case it occupies a word (4 bytes):
 

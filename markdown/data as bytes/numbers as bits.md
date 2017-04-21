@@ -1,4 +1,6 @@
-# decimal numbers (base-10)
+# numbers as bits
+
+## decimal numbers (base-10)
 
 The system of counting we all know and use is called ***base-10*** or ***decimal*** (*deci-* meaning *ten*). In decimal, we use the ten symbols 0 1 2 3 4 5 6 7 8 and 9. We count by cycling through the digits in that order:
 
@@ -15,18 +17,18 @@ The system of counting we all know and use is called ***base-10*** or ***decimal
 9   nine
 ```
 
-To count beyond nine, we need another digit place: the 9 cycles back to our first symbol, 0, and the digit place to the left (which implicitly starts with a 0) cycles from 0 to 1:
+To count beyond nine, we need another digit place: the 9 cycles back to our first symbol, 0, and the digit place to the left (which implicitly starts as a 0) cycles from 0 to 1:
 
 ```
 09  nine
 10  ten
 ```
 
-As we count, each time the right most digit cycles around from 9 back to 0, the digit to its left cycles to the next symbol in the sequence. Eventually we'll reach 99, and counting one higher cycles the right-most 9 back to 0, and the digit to its left (the other 9) also cycles back to 0, causing the implicit 0 to its left to cycle to 1:
+As we count, each time the right-most digit cycles around from 9 back to 0, the digit to its left cycles to the next symbol in the sequence. Eventually we'll reach 99, and counting one higher cycles the right-most 9 back to 0, and the digit to its left (the other 9) also cycles back to 0, causing the implicit 0 to its left to cycle to 1:
 
 ```
-099 ninety-nine
-100 one hundred
+099  ninety-nine
+100  one hundred
 ```
     
 Effectively, any time you have a series of 9's in the right-most digit places and wish to count one higher, the 9's all cascade back to 0, and the first non-9 digit from the right cycles once. For example:
@@ -36,7 +38,7 @@ Effectively, any time you have a series of 9's in the right-most digit places an
 24000000     twenty-four million
 ```
 
-# binary numbers (base-2)
+## binary numbers (base-2)
 
 The system of counting in which we use just two symbols (0 and 1) is called ***base-2*** or ***binary***.
 
@@ -104,7 +106,7 @@ So this is how we convert from binary to decimal. To go the other way, from deci
 
 ## hexadecimal (base-16)
 
-Because binary numbers are verbose, we generally avoid writing them out as 0's and 1's. Instead, we use another counting system, ***base-16***, ***hexadecimal*** (called 'hex' for short). In hexadecimal, we count with the sixteen symbols 0 1 2 3 4 5 6 7 8 9 A B C D E F (though lowercase A through F are sometimes used instead). Counting in hex is just like counting in decimal or binary, but we just have more symbols to cycle through.
+Because binary numbers are verbose, we generally avoid writing them out as 0's and 1's. Instead, we use another counting system, ***base-16***, ***hexadecimal*** (also called 'hex'), as a shorthand for binary. In hexadecimal, we count with the sixteen symbols 0 1 2 3 4 5 6 7 8 9 A B C D E F (though lowercase A through F are sometimes used instead). Counting in hex is just like counting in decimal or binary, but we just have more symbols to cycle through.
 
 It works out that, because 16 is a power of 2, conversion between hex and binary is extremely easy to do, requiring no arithmetic at all. All you need to do is memorize the correspondence between the first 16 binary and hex numbers:
 
@@ -145,9 +147,7 @@ To avoid confusion between written decimal, binary, and hex numbers, we usually 
 
 As you've probably guessed by now, we represent positive decimal integers as bits by simply converting to binary. The decimal number 130, for example, has the binary equivalent 10000010 and so can be represented with 8 bits.
 
-# negative numbers
-
-An unsigned integer is always positive, never negative. If we use 8 bits to store an unsigned integer, we can represent the values 0 up to 255:
+An ***unsigned*** integer is always positive, never negative. If we use 8 bits to store an unsigned integer, we can represent the values 0 up to 255:
 
 ```
 0000_0000    (0)
@@ -155,136 +155,3 @@ An unsigned integer is always positive, never negative. If we use 8 bits to stor
 ...
 1111_1111    (255)
 ```
-
-A *signed* integer is either positive or negative. To indicate that a binary number stored as bits is meant to be negative, we can't just stick a minus sign in front: all we have are bits, not minus signs!
-
-## sign bit
-
-The most obvious way to represent signed numbers is to designate one bit to act as the sign. Usually this is the most-significant bit (the 'leftmost' bit), and usually 0 indicates positive while 1 indicates negative. For example, assuming we use 8 bits to store a signed integer, we can represent the values -127 up to +127 
-
-```
-0000_0000    (+0)
-0000_0001    (+1)
-...
-0111_1110    (+126)
-0111_1111    (+127)
-
-1000_0000    (-0)
-1000_0001    (-1)
-...
-1111_1110    (-126)
-1111_1111    (-127)
-```
-
-(Note that we effectively have both a positive and negative zero.)
-
-## one's complement
-
-An alternative way of representing signed integers, called *one's complement*, flips all the bits of a positive to get its negative equivalent (and *vice versa*). For an 8-bit one's complement integer, we can represent the values -127 up to +127:
-
-```
-0111_1111     (+127)
-0111_1110     (+126)
-...
-0000_0001     (+1)
-0000_0010     (+2)
-0000_0000     (+0)
-1111_1111     (-0)
-1111_1110     (-1)
-1111_1101     (-2)
-...
-1000_0001     (-126)
-1000_0000     (-127)
-```
-
-(Note that the most-significant bit still effectively designates the sign.)
-
-## two's complement
-
-***Two's complement*** is just like one's complement but removes negative zero and shifts the negative values down by one, *e.g.* whereas 1111_1010 is -5 in one's complement, it's -6 in two's complement. We end up with just one representation of zero and one more negative value. For example, given 8 bits, we can represent the values -128 up to +127:
-
-```
-0111_1111     (+127)
-0111_1110     (+126)
-...
-0000_0010     (+2)
-0000_0001     (+1)
-0000_0000     (0)
-1111_1111     (-1)
-1111_1110     (-2)
-...
-1000_0010     (-126)
-1000_0001     (-127)
-1000_0000     (-128)
-```
-
-To find the negative of a positive (or *vice versa*), just flip all the bits and add one. (Yes, as surprising as it seems, this works both ways!)
-
-Most CPU's expect signed integers in two's complment form because it requires the simplest circuitry for performing arithmetic.
-
-# rationals
-
-A ***rational number*** is a ratio of two integers, *e.g.* `3/4` (three fourths). We could represent rationals in a computer as simply two separate integers, *e.g.* 8 bits for the numerator and 8 bits for the numerator. However, performing arithmetic on rationals in this form is relatively complicated (and so costly).
-
-## fixed-point
-
-***Fixed-point*** is the computing equivalent of radix-point notation, *i.e.* numbers with a dot in them. In decimal, the digits to the right of the radix point represent multiples of a negative power of ten. For example, `25.84` is the sum of these four digits:
-
-```
-20.00     (2 * 10^1)
-05.00     (5 * 10^0)
-00.80     (8 * 10^-1 = eight tenths)
-00.04     (2 * 10^-2 = four hundredths)
-```
-
-In binary, the digits to the right of the radix point represent multiples of a negative power of *two*. For example, `10.0101` is the sum of these six digits:
-
-```
-10.0000     (1 * 2^1)
-00.0000     (0 * 2^0)
-00.0000     (0 * 2^-1 = zero halves)
-00.0100     (1 * 2^-2 = one fourth)
-00.0000     (0 * 2^-3 = zero eighths)
-00.0001     (1 * 2^-4 = one sixteenth)
-```
-
-In radix-point notation, not all rational values can be represented with a finite number of digits. For example, representing `1/3` (one third) in decimal radix-point requires an infinite number of digits:
-
-```
-0.33333333333...  (infinitely repeating 3's)
-```
-
-Not all values which can be represented with a finite number of digits in decimal are also finite in binary. For example, decimal `0.7` can only be exactly represented in binary with an infinite number of digits:
-
-```
-0.10110011001100... (infinitely repeating pattern of 1100)
-```
-
-(All values which can be represented in binary with a finite number of digits can be represented in decimal with a finite number of digits.)
-
-## floating-point numbers
-
-***Floating-point*** is the computing equivalent of scientific notation (*a.k.a.* engineering notation). In scientific notation, a value is represented as a *significand* multiplied by a power of ten. For example, the significand `78.113402` with exponent `4` represents `781134.02` because we shift the radix point of the significant right by four places. (When the exponent is negative, we shift it left.)
-
-In binary, the exponent is a power of *two*, but it otherwise works the same: the exponent signifies how many digit places to shift the radix point (right if positive, left if negative).
-
-Represented as bits, we need to decide how many bits to use to represent the significand and how many to represent the exponent. The radix point is implicit after the first significand bit. For example, assuming we have 8 bits for a significand and 8 bits for an exponent (represented in two's complement)...
-
-```
-0000_0101  (significand with implicit radix point after the leftmost digit)
-0000_0011  (exponent +3)
-```
-
-...this represents `0.0101` because we took `0.0000101` and shifted the radix point right three places.
-
-Generally it's more useful to have more significand bits than exponent bits. The more significand bits, the more *precision* we can represent; the more exponent bits, the larger the *range* of values we can represent.
-
-The [IEEE](https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers) (Institute of Electrical and Electronics Engineers) has codified standard formats for floating-point numbers. Many modern processors can perform arithmetic upon floating-point numbers in these standard formats.
-
-## numbers of arbitrary size and precision 
-
-In most code, we represent numbers using a finite number of bits. In some cases, however, we need to represent numbers of unlimited size and precision. For example, when computing sums of money, we generally shouldn't use floating-point because doing so creates rounding errors: given only-so-many bits for representing significands and exponents, some values must get approximated.
-
-While CPU's do not directly operate upon numbers of arbitrary size and precision, we can store and operate upon such numbers by breaking them down into smaller numbers. For example, if we could only directly store 5-digit numbers, we could still store a 20-digit number as 4 separate 5-digit numbers. Similarly, if we could only directly perform addition on 5-digit numbers, we could perform addition on 20-digit numbers by breaking the work into multiple-steps of addition on 5-digit numbers.
-
-We'll ellide over the details here. Just understand that code can deal with arbitrary numbers when really necessary.

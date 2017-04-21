@@ -1,67 +1,91 @@
 # Java arrays
 
-Unlike arrays in Go, the size is not integral to the type, *e.g.* an array of 7 ints is the same type as an array of 4 ints.
+Unlike an array in Javascript, an array in Java is homogenous (meaning it only stores values of one kind) and fixed in size. If we create an array of 7 `int`'s, that array can only ever store `int'`s, and always seven of them. (As we'll see later, lists that can grow in size are provided by some classes in the standard library.)
 
-Like classes, interfaces, and enums, Java considers arrays to be 'reference types', meaning an array variable stores just a reference, not an array itself. To denote an array variable, `[]` *follows* the type:
-
-```java
-int[] ints;               // variable 'ints' stores a reference to an array of ints
-String[] strings;         // variable 'strings' stores a reference to an array of strings
-```
-
-To create an actual array, we use the `new` operator and specify a size inside `[]`. The size can be a run time expression. The values in an array of a primitive type default to zero; the references in an array of a reference type default to `null`:
+The type of an array variable is denoted `type[]`. Arrays are reference types, so any array variable stores a reference to an array:
 
 ```java
-int[] ints = new int[5];                 // assign to 'ints' a reference to a new array of 5 ints; the 5 values default to 0
-ints = new int[3];                       // assign to 'ints' a reference to a new array of 3 ints; the 3 values default to 0
-int i = 11;
-String[] strings = new String[i - 4];    // assign to 'strings' a reference to a new array of 7 String references; the 7 references default to null
+int[] arr;                    // a variable 'arr' that stores a reference to an int array
+String[] strings;             // a variable 'strings' that stores a reference to a String array
 ```
 
-An array of a primitive type stores the values directly, *e.g.* an array of 5 ints stores 5 ints directly. In contrast, an array of a reference type stores references, not values directly:
+To create an actual array, we use the `new` operator followed by the array type with integer expression denoting the size in the square brackets:
 
 ```java
-Cat[] cats = new Cat[3];
-cats[0] = new Cat();           // index 0 now references a new Cat
-cats[1] = cats[0];             // index 1 now references the same Cat as index 0
-cats[2] = cats[0];             // index 2 now references the same Cat as index 0
+int[] arr;
+arr = new int[5];             // create a new array of 5 ints and assign it to 'arr'
+String[] strings;      
+strings = new int[11];        // create a new array of 11 Strings and assign it to 'strings'
 ```
+
+Just like a primitive variable, an array of a primitive types stores values directly, *e.g.* when we assign an `int` to an index of an `int` array, the value is copied into the array. 
+
+Likewise, an array of a reference type stores references, *e.g.* when we assign a String to an index of a String array, the address of the String is copied into the array.
+
+We access the indexes of an array with `[]`, just like in Javascript. Accessing indexes out of bounds throws an exception. Assigning values of the wrong type throws an exception:
+
+```java
+int[] arr = new int[5];
+arr[2] = 100;
+arr[4] = 80;
+int x = arr[2];               // 100
+arr[5] = 70;                  // exception: index 5 is out of bounds
+arr[-1] = 2;                  // exception: index -1 is out of bounds
+arr[1] = "hello";             // exception: "hello" is not an int
+```
+
+By default, the values of an array start out as zeroes (for number primitives), false (for booleans), or null (for any reference type). We can, however, optionally use `{}` to specify initial values when we create an array:
+
+```java
+int[] arr = new int[5]{7, 92, 561, -32, 0};      // create an int array with the initial values 
+```
+
+This is not any more effecient than assigning the values individually after creating the array, but it is sometimes more convenient and makes the code look neater.
+
+Every array has a length property:
+
+```java
+int[] arr = new int[8];
+int x = arr.length;                // 8
+```
+
+## arrays of arrays
 
 We can create arrays of arrays:
 
 ```java
-int[][] ints = new int[5][];    // assign to 'ints' a reference to a new array of 5 int arrays; the 5 values default to null
-ints[0] = new int[11];          // index 0 now references a new array of 11 ints
-ints[1] = ints[0];              // index 1 now references the same array as index 0
-ints[1] = ints[3];              // index 1 now null
-ints[4] = new int[7];           // index 4 now references a new array of 7 ints
+int[][] arr = new int[5][];        // assign to 'arr' a reference to a new array of 5 int arrays; the 5 values default to null
+arr[0] = new int[11];              // index 0 now references a new array of 11 ints
+arr[1] = arr[0];                   // index 1 now references the same array as index 0
+arr[1] = arr[3];                   // index 1 now null
+arr[4] = new int[7];               // index 4 now references a new array of 7 ints
 ```
 
 We can create arrays of any dimension (though arrays of 3 dimensions or more are not commonly useful):
 
 ```java
-int[][][] ints = new int[5][][];
-ints[0] = new int[11][];            // index 0 now references a new array of 11 arrays of ints
-ints[4] = new int[7][];             // index 4 now references a new array of 11 arrays of ints
+int[][][] arr = new int[5][][];
+arr[0] = new int[11][];            // index 0 now references a new array of 11 arrays of ints
+arr[4] = new int[7][];             // index 4 now references a new array of 11 arrays of ints
 ```
 
-No matter how many dimensions, a multi-dimensional array is always a contiguous list of references to other arrays. This is different from Go, where an array of arrays contains the 'subarrays' directly, *e.g.* a Go array of 3 arrays of 6 ints stores 18 ints. A Java array of 3 arrays of ints is just 3 references, and the 'subarrays' it might reference may be any size and are stored elsewhere in memory.
+No matter how many dimensions, a multi-dimensional array is always a contiguous list of references to other arrays. A Java array of 3 arrays of ints is just 3 references, and the 'subarrays' it might reference may be any size and are stored elsewhere in memory.
 
 As a convenience, if we specify sizes for the 'subarray' dimensions when creating a multi-dimension array, Java will create subarrays of uniform size:
 
 ```java
-int[][] ints = new int[5][12];       // create subarrays of size 12
+int[][] arr = new int[5][12];       // create subarrays of size 12
 ```
 
 The below is equivalent:
 
 ```java
-int[][] ints = new int[5][];       
-ints[0] = new int[12];
-ints[1] = new int[12];
-ints[2] = new int[12];
-ints[3] = new int[12];
-ints[4] = new int[12];
+int[][] arr = new int[5][];       
+arr[0] = new int[12];
+arr[1] = new int[12];
+arr[2] = new int[12];
+arr[3] = new int[12];
+arr[4] = new int[12];
 ```
 
 All arrays of any type and dimension are considered subtypes of `Object`:
@@ -79,7 +103,3 @@ Mammal[] mammals = new Cat[3];
 Mammal m = mammals[0];                   
 Cat c = (Cat) mammals[0];                // downcast required!
 ```
-
-[arrays are covariant, but generics are not]
-
-[TODO initializing arrays with {}]

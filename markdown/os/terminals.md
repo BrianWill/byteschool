@@ -6,7 +6,7 @@ Before the 1980's, nearly all human user interactions with a computer were throu
 
 In Unix, the OS handles the particulars of talking to a terminal: our program code just needs to read and write a character device file representing the terminal. Writing to a terminal's character device file displays text on the terminal's display; reading from a terminal's character device file reads input from the terminal's keyboard.
 
-The terminal character device files are usually found in the `/dev` directory and have names starting with `tty` (short for 'teletype', a generic term for an electronic printer sent data to print over long distances).
+The terminal character device files are usually found in the `/dev` directory and have names starting with `tty` (short for 'teletype', a generic term for an electronic printer that is sent data to print over long distances).
 
 Of course, today's computers have pointer-driven input and graphical displays rather than hardware terminals. Because many programs we use today still have terminal-based interfaces, we need ***terminal emulator*** programs. A terminal emulator displays a graphical window and gets keyboard/mouse input like other modern programs\*, but the emulator is associated with a character device file: other programs can read this file to get keyboard input typed in the window, and programs can write to this file to display text in the window.
 
@@ -16,7 +16,7 @@ Of course, today's computers have pointer-driven input and graphical displays ra
 
 A ***shell*** is a program that reads user commands from a terminal and executes those commands. Through a shell, the user can launch other programs and control the system.
 
-There are many shells with different rules of syntax and semantics, each a sort of programming language unto itself. The default shell on the original Unix was called `sh` *a.k.a.* the 'Bourne shell' (after its creator, Stephen Bourne). The most commonly used shell today is a variant of sh` called `bash` (short for the 'Bourne Again Shell'). (We cover `bash` in full in later lessons.)
+There are many shells with different rules of syntax and semantics, each a sort of programming language unto itself. The default shell on the original Unix was called `sh` *a.k.a.* the 'Bourne shell' (after its creator, Stephen Bourne). The most commonly used shell today is a variant of `sh` called `bash` (short for the 'Bourne Again Shell'). (We cover `bash` in full in later lessons.)
 
 In most shells, we can run a program and pass it arguments by simply writing the program name followed by zero or more arguments (separated by spaces) and hitting enter:
 
@@ -32,7 +32,7 @@ Arguments with spaces in them must be enclosed in double quotes:
 foo "bla bla" arg2
 ```
 
-Above, the first argument is `"bla bla"`.
+Above, the first argument is `"bla bla"`, and the second is `"arg2"`.
 
 We can also run a program by specifying its absolute path:
 
@@ -41,9 +41,9 @@ We can also run a program by specifying its absolute path:
 /home/brian/bar arg1 arg2
 ```
 
-(A `#` and everything it after in on the line are ignored by the shell.)
+(A '`#`'' character and everything after it in on the line are ignored by the shell.)
 
-Like any other process, the shell has a current working directory. (The shell is usually configured to display the current working directory in the prompt, but this is not always the case.) We can run programs by specifying a path relative from the current working directory:
+Like any other process, the shell has a current working directory. The shell is usually configured to display the current working directory in the prompt, but this is not always the case. We can run programs by specifying a path relative from the current working directory:
 
 ```
 # run 'bar' in directory 'brian' in the current working directory

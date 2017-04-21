@@ -6,6 +6,8 @@
 
  - [bits and bytes](/content/data as bytes/bits and bytes.html)
  - [numbers as bits](/content/data as bytes/numbers as bits.html)
+ - [negative numbers as bits](/content/data as bytes/negative numbers as bits.html)
+ - [rational numbers as bits](/content/data as bytes/rational numbers as bits.html)
  - [text as bits](/content/data as bytes/text as bits.html)
 
 ## hardware and assembly code
@@ -13,15 +15,17 @@
  - [computer hardware](/content/assembly/computer hardware.html)
  - [assembly language](/content/assembly/assembly language.html)
  - [assembly instructions](/content/assembly/assembly instructions.html)
- - [assembly functions and using the stack](/content/assembly/assembly functions.html)
+ - [assembly functions](/content/assembly/assembly functions.html)
  - [assembly I/O](/content/assembly/assembly io.html)
 
 ## Pigeon (an educational language)
 
  - [high-level languages](/content/pigeon/high-level languages.html)
  - [data types, operators](/content/pigeon/data types, operators.html)
+ - [variables](/content/pigeon/variables.html)
  - [if and while statements](/content/pigeon/if statements, while statements.html)
- - [functions, lists](/content/pigeon/functions, lists.html)
+ - [functions](/content/pigeon/functions.html)
+ - [lists](/content/pigeon/lists.html)
 
 ## operating system concepts and system calls
 
@@ -120,10 +124,15 @@
  - [OpenGL]()
  - [image compression]()
 
-
 ## the Javascript language
 
- - [Javascript for Go programmers](/content/js/Javascript for Go programmers.html)
+ - [the Javascript language](/content/js/Javascript.html) 
+ - [if, while, for](/content/js/if, while, for.html)
+ - [arrays, strings](/content/js/arrays, strings.html)
+ - [objects, for-in](/content/js/objects, for-in.html)
+ - [functions, methods](/content/js/functions, methods.html)
+ - [object links, string and array methods](/content/js/object links, string and array methods.html)
+ - [exceptions, anonymous and nested functions, closures](/content/js/exceptions, anonymous and nested functions, closures.html)
 
 ## the C language
 
@@ -135,18 +144,34 @@
 
 ## the Java language
 
- - [Java for Go programmers](/content/java/Java for Go programmers.html)
- - [primitive types, variables](/content/java/primitives, variables.html)
+ - [the Java language](/content/java/Java.html)
+ - [primitive types, operators](/content/java/primitives, operators.html)
  - [classes, constructors](/content/java/classes, constructors.html)
- - [static fields, static methods](/content/java/static fields, static methods.html)
- - [interfaces, method overloading](/content/java/interfaces, overloading.html)
- - [enums](/content/java/enums.html)
  - [inheritance, method overriding](/content/java/inheritance, overriding.html)
- - [packages, access modifiers](/content/java/packages, access modifiers.html)
- - [strings, control flow](/content/java/strings, control flow.html)
  - [arrays](/content/java/arrays.html)
- - [reference assignment and comparison, main method](/content/java/reference assignment and comparison, main method.html)
- - [wrapper types](/content/java/wrapper types.html)
+ - [interfaces](/content/java/interfaces.html)
+ - [static fields, static methods, main methods](/content/java/static fields, static methods.html)
+ - [primitive wrappers](/content/java/wrapper types.html)
+ - [exceptions, assertions](/content/java/exceptions.html)
+ - [enums](/content/java/enums.html)
+ - [abstract classes](/content/java/abstract classes.html)
+ - [generics](/content/java/generics.html)
+ - [nested classes, lambdas](/content/java/nested classes.html)
+ - [annotations](/content/java/annotations.html)
+ - [multi-threading, synchronize](/content/java/annotations.html)
+
+## the Java standard library
+
+ - [strings](/content/java/strings.html)
+ - [files](/content/java/files.html)
+ - java.lang.String
+ - java.lang.System
+ - java.util.ArrayList
+ - java.util.HashMap
+ - java.lang.Object
+ - java.lang.Thread
+ - java.lang.Class
+ - java.io.File, Path
 
 ## the BASH shell
 

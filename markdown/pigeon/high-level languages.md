@@ -42,6 +42,10 @@ A ***function*** is a series of statements that we've given a name, such that we
 
 As discussed earlier, talking to the I/O devices requires executing certain instructions, but nothing described above allows us to execute these instructions! So how do we do I/O in a high-level language? Well, by some means the high-level code we write needs to invoke assembly code which will perform I/O:
 
- - In the C language, for example, we can 'link' our C code to assembly code such that we can invoke the assembly from C. 
+ - In the C language, we can 'link' our C code to assembly code such that we can invoke the assembly from C. 
  - In some other languages, we can link our code to C code such that we can invoke the C code and thus indirectly invoke assembly. 
  - Some other languages simply provide a built-in set of special functions: though called like ordinary functions, these functions do I/O stuff which you couldn't otherwise do in an ordinary function of the language.
+
+## Pigeon (an educational language)
+
+The Pigeon language is a reductively simple programming language I've created for educational purposes. Everything you learn about Pigeon in the next few lessons carries over into real languages, like Python or Javascript.

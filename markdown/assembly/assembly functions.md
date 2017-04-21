@@ -1,16 +1,16 @@
-# assembly functions and using the stack
+# assembly functions
 
-## stack
+## the call stack
 
-A stack is a place to store stuff temporarily. The special rule of a stack is that we remove things from the stack in the reverse order in which we added them, *e.g.* having stored A, B, then C, we should remove them in the order C, then B, then A. In effect, we are always removing the last thing added.
+A stack is a designated place in memory to store stuff temporarily. The special rule of a stack is that we remove things from the stack in the reverse order in which we added them, *e.g.* having stored A, then B, then C, we should remove them in the order C, then B, then A. In effect, any time we remove something, we are always removing the last thing added.
 
-The 64KB of addresses `0xFFFF_0000` up through `0xFFFF_FFFF` are meant to be used as a stack. At program start, the stack pointer register `sp` stores the address `0xF000_0000`. To store a piece of data on the stack, we write it starting at `[sp]` and then increment `sp` by the data's number of bytes. To remove a piece of data from the stack---which must have been the last thing added---we decrement `sp` by the data's number of bytes. (Note that 'removing' something from the stack does not actually overwrite or zero-out the bytes which the data occupied. We simply adjust the stack pointer such that subsequent additions to the stack will overwrite whatever we 'removed'.)
+The 64KB of addresses `0xFFFF_0000` up through `0xFFFF_FFFF` are meant to be used as a stack. At program start, the stack pointer register `sp` stores the address `0xFFFF_0000`. To store a piece of data on the stack, we write it starting at `[sp]` and then increment `sp` by the data's number of bytes. To remove a piece of data from the stack---which must have been the last thing added---we decrement `sp` by the data's number of bytes. (Note that 'removing' something from the stack does not actually overwrite or zero-out the bytes which the data occupied. We simply adjust the stack pointer such that subsequent additions to the stack will overwrite whatever we 'removed'.)
 
 64KB should be well more than enough for our simple programs. (In a modern PC, each running program typically has a stack of a few megabytes.) If we write more data to a stack than for which it has capacity, this is a bug called *stack overflow*. In our simple system, there is no hardware check when a stack overflow occurs; we simply have to be careful about not writing too much data to the stack.
 
 ## functions
 
-In assembly code, what we call a function (or *routine*, or *subroutine*, or *procedure*) is a reuseable chunk of code which we can jump to using the `call` instruction. When done with its business, the function uses `return` to jump execution from back where it was called.
+In assembly code, what we call a ***function*** (or *routine*, or *subroutine*, or *procedure*) is a reuseable chunk of code which we can jump to using the `call` instruction. When done with its business, the function uses `return` to jump execution back to where it was called from.
 
 ```
 # a do nothing function called 'foo' which does nothing and immediately returns

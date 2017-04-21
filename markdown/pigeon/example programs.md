@@ -10,6 +10,9 @@ The "Fizz Buzz" program is a well-known beginner's programming exercise in which
  - for every value evenly divisible by both 3 and 5, we instead print out "FizzBuzz"
 
 ```
+var i
+var by3
+var by5
 as i 1
 while (lte i 100)
     as by3 (eq 0 (mod i 3))
@@ -30,13 +33,22 @@ while (lte i 100)
 String "_" will designate an empty slot, string "X" will designate an X, and string "O" will designate an O. We'll use three lists of three strings each to represent the board: one list to represent the top row, another list to represent the middle row, and another list to represent the bottom row.
 
 ```
+var topRow
+var middleRow
+var bottomRow
+var continue
+var currentPlayer
 as topRow (list "_" "_" "_")
 as middleRow (list "_" "_" "_")
 as bottomRow (list "_" "_" "_")
 as continue true
 as currentPlayer "X"
 
-func playerMove
+function playerMove
+    var move
+    var row
+    var col
+    var slot
     as move null
     while (eq move null)
         as row null
@@ -72,7 +84,10 @@ func playerMove
         
 
 # returns "X" if X wins, returns "O" if O wins, returns "_" if no one wins, and returns "tie" if tied
-func winner
+function winner
+    var topRowFull
+    var middleRowFull
+    var bottomRowFull
     # check top row
     if (and (neq (get topRow 0) "_") (eq (get topRow 0) (get topRow 1) (get topRow 2)))
         return (get topRow 0)
@@ -105,7 +120,7 @@ func winner
         return "tie"
     return "_"
 
-
+var w
 while continue
     (print (concat topRow "\n" middleRow "\n" bottomRow "\n"))
     as w (winner)

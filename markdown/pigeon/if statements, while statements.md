@@ -1,11 +1,11 @@
+# Pigeon `if` and `while` statements
 
-## 'if' and 'while' statements
-
-An 'if' statement in Pigeon begins with the word `if` followed by a condition and a body.
+An `if` statement in Pigeon begins with the word `if` followed by a condition and a body.
 
 The condition is an expression (a value, variable, or operation) which must return a boolean value. The body is one or more indented statements.
 
 ```
+var x
 as x 2
 # because 'x' is not greater than 5, the condition is false, and so the two indented print statements are skipped over
 if (gt x 5)
@@ -33,6 +33,7 @@ A `while` statement is written just like `if` but starts with the word `while`:
 
 ```
 # this code prints: 0 1 2 3 4 done
+var x
 as x 0
 while (lt x 5)
     (print x)

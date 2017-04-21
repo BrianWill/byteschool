@@ -1,4 +1,5 @@
-# Java static fields, static methods, and *main* methods
+# Java static fields and static methods
+
 
 ## static fields (global variables in disguise)
 
@@ -66,27 +67,3 @@ int i = c.foo();       // same as Cat.foo()
 ```
 
 This notation is frankly confusing and misleading: no instance is passed to the static method. Think of a static method as a function that lives in the namespace of a class.
-
-## inheritance and overriding of statics
-
-Technically, static fields and methods are considered to be inherited. For example, if class *Cat* extends *Mammal*, we can access the static *Mammal.foo* as *Cat.foo* (unless *Cat* defines its own static *foo*).
-
-Because it's confusing and misleading to think in these terms, it's best practice to access static members only through the class to which they directly belong. 
-
-Also be clear that, though static fields can in a sense be overridden---*Cat* can redefine a static method it inherits from *Mammal*---a static method call is always fixed at compile time. If we call a static method *via* a *Mammal* reference, it never matters what type the reference actually holds at runtime: the method called is always the one belonging to *Mammal*.
-
-## *main* method
-
-Program execution begins by calling a method named ***main***. When we start the Java runtime, we specify a `public` class, and execution begins by calling the *main* method of the class. The method must be `public`, `static`, return `void`, and have a single parameter, which must be a String array (the name of the parameter does not matter, but the usual name is *args*).
-
-```java
-public class Foo {
-    public static void main(String[] args) {
-        // ...
-    }
-}
-```
-
-The program arguments are bundled into a String array and passed to the parameter.
-
-It's fine if multiple classes have a *main* method. One is selected by the user, and that is where program execution begins.
