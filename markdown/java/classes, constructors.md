@@ -28,7 +28,7 @@ All class, interface, and enum names must begin with a capital letter. (Note tha
 
 The fields and methods need not be written in any particular order, but it's common convention to put the fields before the methods.
 
-A method is preceded by its return type. A method must return its declared type. For methods that return no value, the reserved word `void` is used to indicate the absense of any return type.
+A method is preceded by its return type. A method must return its declared type. For methods that return no value, the reserved word `void` is used to indicate the absence of any return type.
 
 Fields and method parameters store values just like variables, and so they must have declared types. We can only assign values of the declared type to a field, and we can only pass values of the declared type to a parameter. If we break these rules, the compiler will know!
 
@@ -56,7 +56,7 @@ class Cat {
 }
 ```
 
-There is no requirement to intialize every field. A primitive field defaults to `0 `(or `false` for a boolean), and a reference field defaults to `null`.
+There is no requirement to initialize every field. A primitive field defaults to `0 `(or `false` for a boolean), and a reference field defaults to `null`.
 
 If we don't give our class a constructor, it implicitly has a do-nothing constructor with no parameters.
 
@@ -78,7 +78,7 @@ c.weight = c.weight + 1.2;       // the Cat gained weight
 c.meow();                        // call the 'meow' method of 'Cat', passing instance 'c' to 'this'
 ```
 
-Referring to non-existant fields or methods triggers a compile error:
+Referring to non-existent fields or methods triggers a compile error:
 
 ```java
 Cat c = new Cat(6.5, "Mittens");

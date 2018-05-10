@@ -3,7 +3,7 @@
 An ***operating system*** (OS)...
 
  - loads and manages the running of other programs
- - provides hardware access to the programs *via* ***system calls***
+ - provides input/output device access to the programs *via* ***system calls***
  - provides storage device access to the programs *via* a ***filesystem***
  - provides a user interface for starting and managing running programs
 
@@ -13,7 +13,7 @@ In this lesson, we'll stick to describing what all three have in common.
 
 ## interrupts
 
-While a CPU controls I/O devices by reading and writing their registers, the only control an I/O device has over the CPU is to send *interrupt signals*. When a device sends the CPU an interrupt signal, the CPU suspends execution of whatever it's doing and jumps execution to the device's associated *interrupt handler*. An interrupt handler is a small piece of OS code that typically reads data from registers of a device and responds accordingly. Without interrupt signals, a device would have no means of telling the CPU when it needs attention.
+While a CPU controls I/O devices by reading and writing their registers, the only control an I/O device has over the CPU is to send *interrupt signals*. When a device sends the CPU an interrupt signal, the CPU suspends execution of whatever it's doing and jumps execution to the device's associated *interrupt handler*. An interrupt handler is a small piece of OS code that typically reads data from registers of a device and responds to the data read accordingly. Without interrupt signals, a device would have no means of telling the CPU when it needs attention.
 
 ## device drivers
 
@@ -35,7 +35,7 @@ Certain instructions in certain cases may trigger *hardware exceptions*. When a 
 
 A modern CPU has at least two different privilege modes: in the highest privilege mode, the CPU can do anything; in other modes, executing certain instructions and accessing certain addresses may trigger hardware exceptions.
 
-OS code runs in highest-privilege mode such that it can do anything, but processes run in a low-privilege mode such that they cannot directly access I/O devices and can only access memory addresess as authorized by the OS. When an interrupt or exception occurs, the CPU is kicked up to highest-privilege mode. Before the scheduler resumes execution of a process, it sets the CPU back down to a low-privilege mode.
+OS code runs in highest-privilege mode such that it can do anything, but processes run in a low-privilege mode such that they cannot directly access I/O devices and can only access memory addresses as authorized by the OS. When an interrupt or exception occurs, the CPU is kicked up to highest-privilege mode. Before the scheduler resumes execution of a process, it sets the CPU back down to a low-privilege mode.
 
 ## virtual memory
 

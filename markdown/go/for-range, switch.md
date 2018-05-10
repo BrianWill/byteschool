@@ -24,7 +24,17 @@ for key, value := range foo {
 }
 ```
 
-Note that `for-range` always expects two assignment targets. If you only need one, use the blank identifier for the other:
+If we give `for-range` only one assignment target, the variable is assigned the index/key, not the value:
+
+```go
+foo := []int{10, 20, 30, 40}
+// prints: 0, then 1, then 2, then 3
+for i := range foo {
+    fmt.Println(value)
+}
+``` 
+
+If you only need the value and not the index/key, use the blank identifier for the first target:
 
 ```go
 foo := []int{10, 20, 30, 40}

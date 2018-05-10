@@ -10,7 +10,7 @@ The 64KB of addresses `0xFFFF_0000` up through `0xFFFF_FFFF` are meant to be use
 
 ## functions
 
-In assembly code, what we call a ***function*** (or *routine*, or *subroutine*, or *procedure*) is a reuseable chunk of code which we can jump to using the `call` instruction. When done with its business, the function uses `return` to jump execution back to where it was called from.
+In assembly code, what we call a ***function*** (or *routine*, or *subroutine*, or *procedure*) is a reusable chunk of code which we can jump to using the `call` instruction. When done with its business, the function uses `return` to jump execution back to where it was called from.
 
 ```
 # a do nothing function called 'foo' which does nothing and immediately returns
@@ -76,7 +76,7 @@ lw r2, [sp 4]
 return
 ```
 
-Above, if *ack* didn't adjust the stack pointer to account for the stack space it uses, its call to *bar* would write over the data that *ack* put on the stack. As long as every function follows the rules, any function can call any other without worriying about interference with its data.
+Above, if *ack* didn't adjust the stack pointer to account for the stack space it uses, its call to *bar* would write over the data that *ack* put on the stack. As long as every function follows the rules, any function can call any other without worrying about interference with its data.
 
 ## function inputs (arguments)
 

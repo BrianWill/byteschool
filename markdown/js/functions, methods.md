@@ -19,24 +19,55 @@ foo(6, "hi", 2)        // call function 'foo' with arguments 6, "hi", and 2
 
 If a function does not explicitly return a value with a `return` statement, it implicitly returns the value `undefined`.
 
-Like in Pigeon, functions are values: we can assign them to variables, pass them into functions, and return them from functions. An *anonymous function* is an expression returning a new function. It looks just like a statement defining a function, but we don't have to specify a name after `function`:
+Like in Pigeon, functions are values: we can assign them to variables, pass them into functions, and return them from functions.
+
+## anonymous and nested functions
+
+A ***nested function*** is a function created inside another function. A function statement inside another function assigns the nested function to a local variable of the enclosing function:
 
 ```javascript
-var foo = (function(a, b) {
-    // ...
-});                       
-```
-
-(The parens surrounding the function are not needed, but I include them to emphasize that this is an expression. Also note the semi-colon at the end.)
-
-A function statement is really just shorthand for declaring a variable and assigning it an anonymous function:
-
-```javascript
-// just like the previous example, this creates a variable 'foo' and assigns it a new function
-function foo(a, b) {
+function foo() {
+    // the new function is assigned to local variable 'bar' of the function 'foo'
+    function bar() {
+        // ...
+    }
     // ...
 }
 ```
+
+An ***anonymous function*** is a function created as an expression rather than a statement:
+
+```javascript
+// an anonymous function assigned to variable 'foo'
+var foo = function(a, b) {
+    return a + b;
+};
+
+// same as above, but the anonymous function is surrounded in parens for clarity
+var foo = (function(a, b) {
+    return a + b; 
+});
+```
+
+A function statement is really just shorthand for declaring a variable and assigning it an anonymous function:
+
+```
+// a function statement assigning a new function to variable 'foo'
+function foo(a, b) {
+    return a + b;
+}
+```
+
+Anonymous functions are especially convenient when we create a function only for the purpose of passing it as argument to a call:
+
+```javascript
+// call 'foo', passing a new function
+foo(function(a, b) {
+    return a + b;
+});
+```
+
+## arguments array
 
 We can call a function with extra arguments with no error. Every function automatically has a local variable *arguments* which is assigned an array containing every argument to the call:
 
@@ -65,18 +96,18 @@ foo(3);                   // undefined
 
 ## methods
 
-Like any other value, we can assign a function to keys of an object. When invoking a function *via* an object property with the `.` operator, the object itself is passed to a special parameter called *this*:
+Like any other type of value, we can assign functions to keys of objects. When invoking a function *via* an object property with the `.` operator, the object itself is passed to a special parameter called *this*:
 
 ```javascript
 var x = {};
 x.foo = function() {
-    return this;         // return value of the special parameter 'this'
+    return this;         // return the value of the special parameter 'this'
 };
 
 x.foo();                 // the value of 'x' is passed to 'this'
 ```
 
-In this arrangement, the function is sometimes called a ***method*** of the object.
+In this arrangement, the function is what we call a ***method*** of the object.
 
 If a function that uses the special parameter *this* is called as a function rather than a method, *this* is passed an object that represents the global namespace of the program:
 

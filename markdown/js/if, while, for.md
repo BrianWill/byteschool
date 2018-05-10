@@ -1,4 +1,4 @@
-# Javascript `if`, `while`, `for`, arrays, strings
+# Javascript `if`, `while`, `for`
 
 ## if, while, and for statements
 
@@ -87,5 +87,5 @@ In effect, the returned value will be truthy when one or both operands are truth
 
 ```javascript
 var a = true || foo();    // true (function 'foo' is not called!)
-var b = false && foo();   // the value returned by calling 'foo'
+var b = false || foo();   // the value returned by calling 'foo'
 ```

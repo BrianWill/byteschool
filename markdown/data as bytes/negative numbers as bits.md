@@ -7,12 +7,11 @@ A *signed* integer is either positive or negative. To indicate that a binary num
 The most obvious way to represent signed numbers is to designate one bit to act as the sign. Usually this is the most-significant bit (the 'leftmost' bit), and usually 0 indicates positive while 1 indicates negative. For example, assuming we use 8 bits to store a signed integer, we can represent the values -127 up to +127 
 
 ```
-0000_0000    (+0)
-0000_0001    (+1)
-...
-0111_1110    (+126)
 0111_1111    (+127)
-
+0111_1110    (+126)
+...
+0000_0001    (+1)
+0000_0000    (+0)
 1000_0000    (-0)
 1000_0001    (-1)
 ...
@@ -30,8 +29,8 @@ An alternative way of representing signed integers, called *one's complement*, f
 0111_1111     (+127)
 0111_1110     (+126)
 ...
-0000_0001     (+1)
 0000_0010     (+2)
+0000_0001     (+1)
 0000_0000     (+0)
 1111_1111     (-0)
 1111_1110     (-1)

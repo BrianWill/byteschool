@@ -1,4 +1,4 @@
-# Javascript exceptions, anonymous and nested functions, closures
+# Javascript exceptions, closures
 
 ## exceptions
 
@@ -21,48 +21,6 @@ try {
     // The exception is represented as an error value.
     // This error value is assigned to the variable name specified in the parens ('ex', in this case).
 }
-```
-
-## anonymous and nested functions
-
-A ***nested function*** is a function created inside another function. A function statement inside another function assigns the nested function to a local variable of the enclosing function:
-
-```javascript
-function foo() {
-    // the new function is assigned to local variable 'bar' of the function 'foo'
-    function bar() {
-        // ...
-    }
-    // ...
-}
-```
-
-An ***anonymous function*** is a function created as an expression rather than a statement:
-
-```javascript
-// an anonymous function assigned to variable 'foo'
-var foo = function(a, b) {
-    return a + b;
-};
-
-// same as above, but the anonymous function is surrounded in parens for clarity
-var foo = (function(a, b) {
-    return a + b; 
-});
-
-// a function statement assigning a new function to variable 'foo'
-function foo(a, b) {
-    return a + b;
-}
-```
-
-Anonymous functions are especially convenient when we create a function only for the purpose of passing it as argument to a call:
-
-```javascript
-// call 'foo', passing a new function
-foo(function(a, b) {
-    return a + b;
-});
 ```
 
 ## closures

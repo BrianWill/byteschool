@@ -8,7 +8,7 @@ Java is a statically-typed language whereas Javascript is a dynamically-typed la
 
 In a statically-typed language, each variable (including each function parameter) is marked by a designated type such that only values of the designated type can be assigned to the variable. Functions and methods are also marked by a 'return type', such that we must always return values of that type (and only that type) from the function or method.
 
-A static-language compiler will refuse to compile the code if we:
+A compiler for a static language will refuse to compile the code if we:
 
  - use the wrong type of operands in an operation
  - assign the wrong type of value to a variable

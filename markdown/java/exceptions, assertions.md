@@ -9,7 +9,7 @@ The `Throwable` class has two children:
  - `java.lang.Error`: thrown in abnormal circumstances, and so not normally caught
  - `java.lang.Exception`: thrown under more normal circumstances, and so often caught
 
- ## checked exceptions
+## checked exceptions
 
 The `java.lang.Exception` class has a child `java.lang.RuntimeException`:
 

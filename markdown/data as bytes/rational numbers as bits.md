@@ -63,4 +63,4 @@ In most code, we represent numbers using a finite number of bits. In some cases,
 
 While CPU's do not directly operate upon numbers of arbitrary size and precision, we can store and operate upon such numbers by breaking them down into smaller numbers. For example, if we could only directly store 5-digit numbers, we could still store a 20-digit number as 4 separate 5-digit numbers. Similarly, if we could only directly perform addition on 5-digit numbers, we could perform addition on 20-digit numbers by breaking the work into multiple-steps of addition on 5-digit numbers.
 
-We'll ellide over the details here. Just understand that code can deal with arbitrary numbers when really necessary.
+We'll elide over the details here. Just understand that code can deal with arbitrary numbers when really necessary.

@@ -17,7 +17,7 @@ A *pid* is simply an integer that uniquely identifies the process. (When a proce
 
 The memory tables, as we've discussed, map pages of virtual addresses to pages of physical addresses. When a process starts, some pages are automatically mapped for storing the processes's code and a call stack. All virtual addresses outside of these pages start out unmapped, and so using them in instructions will trigger hardware exceptions.
 
-In Linux, the *mmap* ('memory map') system call maps pages. When invoking mmap, we specify how many bytes we want (though be clear pages are always allocated as whole pages: if, say, we request just 1 byte, we'll still get a full page). When mamp returns, it returns the starting address of the newly allcoated page(s). Optionally, we can specify which starting address you want, but otherwise the OS will choose for you.
+In Linux, the *mmap* ('memory map') system call maps pages. When invoking *mmap*, we specify how many bytes we want (though be clear pages are always allocated as whole pages: if, say, we request just 1 byte, we'll still get a full page). When *mmap* returns, it returns the starting address of the newly allocated page(s). Optionally, we can specify which starting address we want, but otherwise the OS will choose for us.
 
 Remember that system calls are always really just *requests*: for various reasons, the OS may not want---or may not be able---to fill our request, so it will return a value indicating an *error*. Immediately after each system call, our code should always check for an error, and in the event of an error, our code will have to decide how to cope, whether by trying again, trying something else, or aborting.
 
@@ -73,7 +73,7 @@ The *exec* system call wipes the process's memory tables and loads new code from
 
 If the exec'd file has its "setuid" bit flipped on, the "effective" and "saved" id are set to match the owner of the file. By forking and execing such a file, a process can launch another process with different permissions than its own.
 
-When calling exec, we can pass a list of strings called the "program arguments". A process can access the program args that were passed to it using [what sys call? desginated address?]  . The significance of the arguments is entirely up to the interpretation of the receiveing process. Typically, program arguments are used to specify options about how the program should run or what it should do.
+When calling exec, we can pass a list of strings called the "program arguments". A process can access the program args that were passed to it using [what sys call? designated address?]  . The significance of the arguments is entirely up to the interpretation of the receiving process. Typically, program arguments are used to specify options about how the program should run or what it should do.
 
 Aside from the new memory tables and program arguments, the newly exec'd process retains everything else: the environment, the file descriptors, *etc.*
 

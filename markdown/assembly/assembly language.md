@@ -59,7 +59,7 @@ Several instructions use 0 (0x0000_0000) to represent *true* and -1 (0xFFFF_FFFF
 
 When we specify addresses in instructions, we do so with two registers and an offset (a signed 32-bit integer) surrounded in `[]`. For example, if register `r1` holds the value `0x00AA_BBC4` and `r2` holds the value `0x0000_0002`, then `[r2 r1 -3]` represents the address `0x00AA_BBC3` (`0x00AA_BBC4` plus `0x0000_0002` minus `3`).
 
-If the offset is omited, it defaults to `0`. If we omit one or both registers, they default to `r0`.
+If the offset is omitted, it defaults to `0`. If we omit one or both registers, they default to `r0`.
 
 An address operand requires six data bytes to represent: one byte for each register and four bytes for the offset.
 

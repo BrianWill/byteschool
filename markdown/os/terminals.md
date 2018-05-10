@@ -53,20 +53,20 @@ brian/bar arg1 arg2
 If we want to run a file in the current working directory, we have to trick the shell:
 
 ```
-# run 'bar' in a direcotry of the PATH
+# run 'bar' in a directory of the PATH
 bar arg1 arg2
 
-# run 'bar' in the current directory
+# run 'bar' in the current working directory
 ./bar arg1 arg2
 ```
 
-Above, `bar` is a valid relative path, but the shell only looks for it in the `PATH` directories. By using `.` to refer to the current directory, we can form a relative path to *bar* that the shell will interpret as a relative path.
+Above, `bar` is a valid relative path, but the shell only looks for it in the `PATH` directories. By using `.` to refer to the current working directory, we can form a path to *bar* that the shell will interpret as relative from the current working directory.
 
 ## echo mode and backspace
 
 Typed input to a terminal isn't necessarily displayed on the terminal: input and output of a terminal are separate! However, terminals can run in *echo mode*, in which any typed input is automatically displayed on screen. While shells almost always leave echo mode on, some terminal programs will turn it off.
 
-You might also notice that you can erase characters with backspace. Terminals conforming to the VT100 standard (most terminal emulators) interpret the ASCII `backspace` control character to mean 'move the cursor back one position'. Hitting the backspace key actually generates three characters, ASCII `backspace`, then `space`, then `backspace` again: back up, overwrite with a space, then back up again. The shell will echo these characters, so hitting backspace effectively erases the last typed character and moves the cursor back one position.
+You might also notice that you can erase characters with backspace. Terminals conforming to the VT100 standard (most terminal emulators) interpret the ASCII `backspace` control character to mean just 'move the cursor back one position'. Hitting the backspace key actually generates three characters, ASCII `backspace`, then `space`, then `backspace` again: back up, overwrite with a space, then back up again. The shell will echo these characters, so hitting backspace effectively erases the last typed character and moves the cursor back one position.
 
 ## standard input, standard output, and standard error
 

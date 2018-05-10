@@ -2,7 +2,7 @@
 
 ## comments
 
-It's sometimes useful to leave notes in code, and so we need some way of telling the compiler or interpreter to ignore a chunk of text. These are called ***comments***. In Pigeon, a comment starts with # and includes all text through the rest of that line:
+It's sometimes useful to leave notes in code, and so we need some way of telling the compiler or interpreter to ignore a chunk of text. These ignored chunks of text are called ***comments***. In Pigeon, a comment starts with # and includes all text through the rest of that line:
 
 ```
 # This number sign and everything after it on the line is ignored by the language
@@ -38,7 +38,7 @@ Because double-quote marks are used to denote the end of the string, you must wr
 "foo\"bar"     # string with the characters: f o o " b a r
 ```
 
-A string can not span multiple lines. To include a newline in a string, you must write `\n`. The actual ASCII/Unicode character(s) this denotes depends upon the platform: on Windows, it denotes CR and LF (carriage return, line feed); on Linux and Mac, it denotes just LF (line feed).
+A string cannot span multiple lines. To include a newline in a string, you must write `\n`. The actual ASCII/Unicode character(s) this denotes depends upon the platform: on Windows, it denotes CR and LF (carriage return, line feed); on Linux and Mac, it denotes just LF (line feed).
 
 ```
 "foo\nbar"     # string with the characters: f o o newline b a r
@@ -168,7 +168,7 @@ The `concat` (concatenate) operator produces a string that is the concatenation 
 
 ## input/output
 
-As dicsussed earlier, performing input and output ultimately requires system calls. Because Pigeon is a simple, educational language, it has no facility for performing system calls, but it does provide two operators for doing very basic input/output.
+As discussed earlier, performing input and output ultimately requires system calls. Because Pigeon is a simple, educational language, it has no facility for performing system calls, but it does provide two operators for doing very basic input/output.
 
 The `print` operator displays text on screen:
 

@@ -74,7 +74,7 @@ func foo() error {
     var bool somethingWrong
     // ... stuff happens, possibly setting 'somethingWrong' to true
     if somethingWrong {
-        return new.Errors("something went wrong")
+        return errors.New("something went wrong")
     } else {
         return nil
     }

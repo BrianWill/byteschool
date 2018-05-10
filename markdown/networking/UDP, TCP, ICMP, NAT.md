@@ -1,4 +1,3 @@
-
 ## UDP (User Datagram Protocol)
 
 When we send an IP packet, we specify in the header the protocol of the packet's data.

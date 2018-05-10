@@ -1,4 +1,3 @@
-
 # Linux system calls for files and directories
 
 Each process has a current working directory. When a process passes relative paths to certain system calls, the paths are resolved relative to the current working directory. For example, if a program has the current working directory `/harry/ted` and passes relative path `alice/bob` to the system call for opening files, the call opens the file `/harry/ted/alice/bob`.
@@ -45,7 +44,7 @@ It is the responsibility of the process to keep calling *read* until it has all 
 
 The *write* system call is just like *read*, but the data is copied in the other direction, from the process's memory to the file. Like with *read*, the number of bytes actually copied may be fewer than we request.
 
-If we write to positions past the current end of the file, the file will grow to accomodate the new bytes.
+If we write to positions past the current end of the file, the file will grow to accommodate the new bytes.
 
 ### mkdir
 
@@ -81,7 +80,7 @@ The *unmount* system call unmounts a partition. After, the mount point (the dire
 
 ### chdir
 
-The *chdir* system call changes the working directory of the process. When we pass a relative path to a system call, it is resolved relative from the workign directory.
+The *chdir* system call changes the working directory of the process. When we pass a relative path to a system call, it is resolved relative from the working directory.
 
 ### symlink
 

@@ -1,4 +1,4 @@
-# Javascript arrays, strings.md
+# Javascript arrays, strings
 
 ## arrays
 
@@ -17,13 +17,14 @@ var y = x[0];                // 7
 var z = x[2];                // "hi"
 ```
 
-We set the value at an index by assigning to `[]` used on an array:
+We set the value at an index by assigning to a `[]` operation:
 
 ```javascript
 var x = [7, 16, "hi", -9];
 var y = x[1];                // 16
 x[1] = "yo";
 y = x[1];                    // "yo"
+```
 
 We can get the length of the array with the dot operator:
 

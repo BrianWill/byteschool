@@ -9,10 +9,10 @@ TODO
 
 */
 
-const MAX_ADDRESS = Math.pow(2, 32) - 1;
-const MAX_VALUE = Math.pow(2, 32) - 1;
-const MIN_VALUE = -Math.pow(2, 31);
-const MIN_MEMORY_ADDRESS = 0x40000000;
+const MAX_ADDRESS = Math.pow(2, 32) - 1,
+    MAX_VALUE = Math.pow(2, 32) - 1,
+    MIN_VALUE = -Math.pow(2, 31),
+    MIN_MEMORY_ADDRESS = 0x40000000;
 
 // token types
 const SQUARE_LEFT = 0,
@@ -402,7 +402,7 @@ function writeMemory(address, value) {
     }
 }
 
-// depending upon the instruction, it has properties .dest, .src, .op1, .op2
+// depending upon the instruction
 function runInstruction(ins) {
     var op1 = ins.operands[0];
     var op2 = ins.operands[1];

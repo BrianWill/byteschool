@@ -22,9 +22,8 @@
 
  - [high-level languages](/content/pigeon/high-level languages.html)
  - [data types, operators](/content/pigeon/data types, operators.html)
- - [variables](/content/pigeon/variables.html)
+ - [functions and variables](/content/pigeon/functions.html)
  - [if and while statements](/content/pigeon/if statements, while statements.html)
- - [functions](/content/pigeon/functions.html)
  - [lists](/content/pigeon/lists.html)
 
 ## operating system concepts and system calls
@@ -126,13 +125,13 @@
 
 ## the Javascript language
 
- - [the Javascript language](/content/js/Javascript.html) 
+ - [data types, variables, operators](/content/js/Javascript.html) 
  - [if, while, for](/content/js/if, while, for.html)
  - [arrays, strings](/content/js/arrays, strings.html)
  - [objects, for-in](/content/js/objects, for-in.html)
  - [functions, methods](/content/js/functions, methods.html)
  - [object links, string and array methods](/content/js/object links, string and array methods.html)
- - [exceptions, anonymous and nested functions, closures](/content/js/exceptions, anonymous and nested functions, closures.html)
+ - [exceptions, closures](/content/js/exceptions, closures.html)
 
 ## the C language
 

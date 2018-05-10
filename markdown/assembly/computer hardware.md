@@ -5,11 +5,11 @@ Computer systems can be loosely grouped into these types:
  - **client/workstation**: A general-purpose system primarily for interactions with a human user, such as a PC.
  - **server**: A system primarily used to respond to requests from other systems across the network.
  - **handheld**: Like a client/workstation, but miniaturized, *e.g.* cell phones.
- - **embedded sytsem**: A sytem designed to perform one or a few dedicated functions. It is embedded as part of a complete device, such as a car or toaster.
+ - **embedded system**: A system designed to perform one or a few dedicated functions. It is embedded as part of a complete device, such as a car or toaster.
  - **mainframe**: A server for high-performance data-handling. Used primarily by large organizations for large data processing needs. Mainframe use has steeply declined since the 1980’s.
  - **supercomputer**: A system for high-performance computation. Used primarily in scientific modeling, such as predicting the weather.
 
-These types differ mainly in their power and performance characteristics. Whatever the type, a computer fundamentally consists of three core componenets:
+These types differ mainly in their power and performance characteristics. Whatever the type, a computer fundamentally consists of three core components:
 
  - one or more CPU’s (Central Processing Units)
  - system memory, *a.k.a.* RAM (Random Access Memory)
@@ -78,4 +78,3 @@ A ***hardware exception*** is like an interrupt but triggered by the CPU itself 
 ## boot firmware
 
 The ***boot firmware*** is the code which the CPU runs upon powering on. This code usually resides in a ROM (Read-Only Memory) chip on the motherboard. On older PC’s, this chip is called the BIOS (Basic Input/Ouput System). On newer PC's, the boot firmware is part of what's called the UEFI (Unified Extensible Firmware Interface). The principle job of boot firmware is to begin the loading of the operating system, which usually resides on a hard drive.
-

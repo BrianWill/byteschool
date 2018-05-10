@@ -18,7 +18,7 @@ The path `X:\foo\bar` refers to a file or directory named *bar* listed in the di
 
 An ***absolute path*** begins with a drive letter, *e.g.* `c:\foo\bar`. A ***relative path*** resolves to a file or directory relative to some other directory. For example, the relative path `apple/orange` resolved relative to `c:\foo\bar` is equivalent to the absolute path `c:\foo\bar\apple\orange` 
 
-(Using \ to separate the components of a path is preferred on Windows, but / is generally valid as well.)
+(Using `\` to separate the components of a path is preferred on Windows, but `/` is generally valid as well.)
 
 Every directory has a special entry `.` which refers to the directory. For example, `c:\foo\.\bar` is effectively the same as `c:\foo\bar`
 
@@ -28,7 +28,7 @@ Every directory also has a special entry `..` which refers to the containing dir
 
 On Unix systems, such as Linux and OS X, file paths are different in three ways:
 
-First, only / is allowed, never \\. 
+First, only `/` is allowed, never `\`. 
 
 Second, whereas Windows generally does not care about letter case in file and directory names, Unix systems do care, *e.g.* *foo*, *FOO*, *Foo*, *FoO*, *etc.* are all different names in Unix.
 
@@ -82,7 +82,7 @@ Though device file are OS abstractions---and so they do not necessarily represen
 
 ## block device files
 
-A ***block device file*** also represents an I/O device, but like a regular file, the data we read and write from a block device logically has a beginning and an end. Unlike with a character deivce file, when we read or write a block device, we specify 'where' to read or write.
+A ***block device file*** also represents an I/O device, but like a regular file, the data we read and write from a block device logically has a beginning and an end. Unlike with a character device file, when we read or write a block device, we specify 'where' to read or write.
 
 ## pseudo-devices
 

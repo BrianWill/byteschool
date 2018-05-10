@@ -1,4 +1,3 @@
-
 # assembly instructions
 
 The instructions of our fictional processor are divided into six groups:

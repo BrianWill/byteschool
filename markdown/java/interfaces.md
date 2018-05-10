@@ -1,13 +1,13 @@
 # Java interfaces
 
-An ***interface*** specifies a set of method names along with parameter types, return types, and access modifiers for these named methods:
+An ***interface*** specifies a set of method names along with parameter types and return types for these named methods:
 
 ```java
 // an interface named Dog
 interface Dog {
-    public String bark(int, String);      // method named 'bark' returns a String and takes an int and a String
-    private void woof();                  // method named 'woof' returns nothing and takes nothing
-    public int eat(float);                // method named 'eat' returns an int and takes a float
+    String bark(int, String);      // method named 'bark' returns a String and takes an int and a String
+    void woof();                  // method named 'woof' returns nothing and takes nothing
+    int eat(float);                // method named 'eat' returns an int and takes a float
 }
 ```
 

@@ -1,10 +1,6 @@
-# the Javascript language
-
-(Our coverage of Javascript assumes familiarity with Pigeon but no other programming language.)
-
 ## running Javascript code
 
-A web browser includes a *Javascript engine*, a component for compiling and runnning Javascript code. When you visit a web page, Javascript code included with the page is compiled and run by the browser. The code can manipulate the page, respond to user interactions, and retrieve more data from servers, but it cannot access files on the local system or perform other security-sensitive tasks.
+A web browser includes a *Javascript engine*, a component for compiling and running Javascript code. When you visit a web page, Javascript code included with the page is compiled and run by the browser. The code can manipulate the page, respond to user interactions, and retrieve more data from servers, but it cannot access files on the local system or perform other security-sensitive tasks.
 
 *Node.js* (usually just called 'Node') is a Javascript engine for running standalone programs outside any web browser. Unlike web browsers, Node lets Javascript code access files and all the other things which normal programs can do. Node is most commonly used for creating servers (programs which listen and respond to requests from other computers over the network).
 
